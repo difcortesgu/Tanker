@@ -8,11 +8,10 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         JFrame j = new JFrame("Rebotes");
         Tablero r = new Tablero(500,500);
-        Tanque t = new Tanque(250,250,40,Color.MAGENTA,r);
+        Tanque t = new Tanque(250,250,50,Color.MAGENTA,r);
         r.setTanque(t);
 
         j.setSize(500,500);
-        r.setBounds(0, 0, 250, 250);
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         j.setLocationRelativeTo(null);
         j.add(r);
