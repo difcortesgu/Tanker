@@ -34,6 +34,7 @@ public class Bala {
     }
 
     public void paint(Graphics2D g){
+        g.setColor(color);
         g.fillOval(x, y, radio*2, radio*2);
     }
     

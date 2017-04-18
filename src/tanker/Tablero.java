@@ -31,6 +31,7 @@ public class Tablero extends JPanel{
             }
             @Override
             public void keyReleased(KeyEvent e) {
+                tanque.KeyReleased();
             }
         });
         setFocusable(true);
