@@ -38,6 +38,10 @@ public class Bala {
         g.fillOval(x, y, radio*2, radio*2);
     }
     
+    public void borrar() throws Throwable{
+        this.finalize();
+    }
+    
     public int getX() {
         return x;
     }

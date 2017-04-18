@@ -19,8 +19,6 @@ public class Tablero extends JPanel{
         this.ancho = ancho;
         this.alto = alto;
 
-        
-                
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {

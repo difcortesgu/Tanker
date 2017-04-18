@@ -28,17 +28,18 @@ public class Tanque {
     }
 
     public void disparar(){
-        int x1=x,y1=y;
+        int x1=x-10,y1=y-10;
         if(vx>0){
-            x1=x+lado;
+            x1=x+lado+10;
         }
         if(vy>0){
-            y1=y+lado;
+            y1=y+lado+10;
         }
         balas.add(new Bala(x1,y1,vx,vy,tablero));
     }
     
-    public void actualizar(){
+    public void actualizar() throws Throwable{
+        int n=0;
         if(vx==-1 && x>0){      
             x+=vx;
         }
@@ -51,26 +52,38 @@ public class Tanque {
         if(vy==1 && y<tablero.getHeight()-lado){
             y+=vy;
         }
+        for(int i=0;i<balas.size();i++){
+            if(balas.get(i).colision()){ 
+                balas.get(i).borrar();
+                balas.remove(i);
+            }
+            n++;
+        }
+        System.out.println(n);
         for(Bala i: balas){
             i.actualizar();
         }
     }
     
     public void KeyPressed(KeyEvent e){
-        if(e.getKeyCode()==KeyEvent.VK_SPACE){
-           disparar();
-        }else
-        if(e.getKeyCode()== KeyEvent.VK_UP ){
-            vy=-1;
-        }else
-        if(e.getKeyCode()== KeyEvent.VK_DOWN){
-            vy=1;
-        }else
-        if(e.getKeyCode()== KeyEvent.VK_RIGHT){
-            vx=1;
-        }else
-        if(e.getKeyCode()== KeyEvent.VK_LEFT){
-            vx=-1;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_SPACE:
+                disparar();
+                break;
+            case KeyEvent.VK_UP:
+                vy=-1;
+                break;
+            case KeyEvent.VK_DOWN:
+                vy=1;
+                break;
+            case KeyEvent.VK_RIGHT:
+                vx=1;
+                break;
+            case KeyEvent.VK_LEFT:
+                vx=-1;
+                break;
+            default:
+                break;
         }
         
     }
@@ -79,8 +92,6 @@ public class Tanque {
         vx=0;
         vy=0;
     }
-    
-
     
     public boolean colision(){
         return y+vy<tablero.getHeight()-lado || y+vy<=0 || x+vx<tablero.getWidth()-lado || x+vx>0;
