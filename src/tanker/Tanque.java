@@ -35,46 +35,59 @@ public class Tanque {
         if(vy>0){
             y1=y+lado;
         }
-        balas.add(new Bala(x1,y1,1,1,tablero));
+        balas.add(new Bala(x1,y1,vx,vy,tablero));
     }
     
     public void actualizar(){
-        x+=vx;
-        y+=vy;
+        if(vx==-1 && x>0){      
+            x+=vx;
+        }
+        if(vx==1 && x<tablero.getWidth()-lado){
+            x+=vx;
+        }
+        if(vy==-1 && y>0){
+            y+=vy;
+        }
+        if(vy==1 && y<tablero.getHeight()-lado){
+            y+=vy;
+        }
+        for(Bala i: balas){
+            i.actualizar();
+        }
     }
     
     public void KeyPressed(KeyEvent e){
-        if(!colision()){
-                if(e.getKeyCode()==KeyEvent.VK_ENTER){
-                    disparar();
-                }
-                if(e.getKeyCode()== KeyEvent.VK_UP){
-                    setVy(-1);
-                }
-                if(e.getKeyCode()== KeyEvent.VK_DOWN){
-                    setVy(1);
-                }
-                if(e.getKeyCode()== KeyEvent.VK_RIGHT){
-                    setVx(1);
-                }
-                if(e.getKeyCode()== KeyEvent.VK_LEFT){
-                    setVx(-1);
-                }
-
-        }else{
-            vx=0;
-            vy=0;
+        if(e.getKeyCode()==KeyEvent.VK_SPACE){
+           disparar();
+        }else
+        if(e.getKeyCode()== KeyEvent.VK_UP ){
+            vy=-1;
+        }else
+        if(e.getKeyCode()== KeyEvent.VK_DOWN){
+            vy=1;
+        }else
+        if(e.getKeyCode()== KeyEvent.VK_RIGHT){
+            vx=1;
+        }else
+        if(e.getKeyCode()== KeyEvent.VK_LEFT){
+            vx=-1;
         }
         
+    }
+    
+    public void KeyReleased(){
+        vx=0;
+        vy=0;
     }
     
 
     
     public boolean colision(){
-        return y+lado>=tablero.getHeight() || y<=0 ||x+lado>=tablero.getWidth() || x<=0;
+        return y+vy<tablero.getHeight()-lado || y+vy<=0 || x+vx<tablero.getWidth()-lado || x+vx>0;
     }
     
     public void paint(Graphics2D g){
+        g.setColor(color);
         g.fillRect(x, y, lado, lado);
         for(Bala i: balas){
             i.paint(g);
