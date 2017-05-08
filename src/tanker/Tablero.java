@@ -8,6 +8,8 @@ import java.awt.RenderingHints;
 import javax.swing.JFrame;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Tablero extends JPanel{
     
@@ -52,7 +54,11 @@ public class Tablero extends JPanel{
     }
     
     public void actualizar() {
-        tanque.actualizar();
+        try {
+            tanque.actualizar();
+        } catch (Throwable ex) {
+            Logger.getLogger(Tablero.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override
