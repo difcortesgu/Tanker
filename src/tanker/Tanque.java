@@ -1,156 +1,34 @@
 package tanker;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import static java.lang.Math.PI;
 import java.util.ArrayList;
 
-public class Tanque {
+public class Tanque extends Elemento implements MouseMotionListener,MouseListener{
 
-    private int x;
-    private int y;
-    private int vx;
-    private int vy;
-    private int lado;
-    private Color color;
+    double dx,dy,mx,my,daño;
     private ArrayList<Bala> balas;
-    private Tablero tablero;
 
-    public Tanque(int x, int y, int lado, Color color,Tablero tablero) {
-        this.x = x;
-        this.y = y;
-        this.vx=0;
-        this.vy=0;
-        this.lado = lado;
-        this.color = color;
+    public Tanque(double x, double y, double vx, double vy, double tamaño, double vida, Tablero tablero) {
+        super(x, y, vx, vy, tamaño, vida, tablero);
+        daño=50;
         balas= new ArrayList();
-        this.tablero=tablero;
     }
 
-    public void disparar(){
-        int x1=x-10,y1=y-10;
-        if(vx>0){
-            x1=x+lado+10;
-        }
-        if(vy>0){
-            y1=y+lado+10;
-        }
-        balas.add(new Bala(x1,y1,vx,vy,tablero));
-    }
-    
-    public void actualizar() throws Throwable{
-        int n=0;
-        if(vx==-1 && x>0){      
-            x+=vx;
-        }
-        if(vx==1 && x<tablero.getWidth()-lado){
-            x+=vx;
-        }
-        if(vy==-1 && y>0){
-            y+=vy;
-        }
-        if(vy==1 && y<tablero.getHeight()-lado){
-            y+=vy;
-        }
-        for(int i=0;i<balas.size();i++){
-            if(balas.get(i).colision()){ 
-                balas.get(i).borrar();
-                balas.remove(i);
-            }
-            n++;
-        }
-        System.out.println(n);
-        for(Bala i: balas){
-            i.actualizar();
-        }
-    }
-    
-    public void KeyPressed(KeyEvent e){
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_SPACE:
-                disparar();
-                break;
-            case KeyEvent.VK_UP:
-                vy=-1;
-                break;
-            case KeyEvent.VK_DOWN:
-                vy=1;
-                break;
-            case KeyEvent.VK_RIGHT:
-                vx=1;
-                break;
-            case KeyEvent.VK_LEFT:
-                vx=-1;
-                break;
-            default:
-                break;
-        }
-        
-    }
-    
-    public void KeyReleased(){
-        vx=0;
-        vy=0;
-    }
-    
+
     public boolean colision(){
-        return y+vy<tablero.getHeight()-lado || y+vy<=0 || x+vx<tablero.getWidth()-lado || x+vx>0;
+        return y+vy<tablero.getHeight()-tamaño || y+vy<=0 || x+vx<tablero.getWidth()- tamaño || x+vx>0;
     }
     
-    public void paint(Graphics2D g){
-        g.setColor(color);
-        g.fillRect(x, y, lado, lado);
+    public void paintComponent(Graphics2D g){
+        g.fillRect((int)x, (int)y, (int)tamaño, (int)tamaño);
         for(Bala i: balas){
-            i.paint(g);
+            i.paintComponent(g);
         }
-    }
-    
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getVx() {
-        return vx;
-    }
-
-    public void setVx(int vx) {
-        this.vx = vx;
-    }
-
-    public int getVy() {
-        return vy;
-    }
-
-    public void setVy(int vy) {
-        this.vy = vy;
-    }
-
-    public int getLado() {
-        return lado;
-    }
-
-    public void setLado(int lado) {
-        this.lado = lado;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 
     public ArrayList<Bala> getBalas() {
@@ -159,6 +37,59 @@ public class Tanque {
 
     public void setBalas(ArrayList<Bala> balas) {
         this.balas = balas;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        dx=(mx-(x+tamaño));
+        dy=(my-(y+tamaño));
+        if(dx>0){
+            a = Math.atan(dy/dx); 
+        }else{
+            a = Math.atan(dy/dx)+PI; 
+        }
+        vx=Math.cos(a);
+        vy=Math.sin(a);
+        x+=vx;
+        y+=vy;
+        tablero.repaint();
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        mx=e.getX();
+        my=e.getY();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        mx=e.getX();
+        my=e.getY();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        balas.add(new Bala(daño,x,y,vx,vy,10,50,tablero));
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
