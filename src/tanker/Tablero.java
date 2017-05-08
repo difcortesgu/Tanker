@@ -8,10 +8,13 @@ import java.awt.RenderingHints;
 public class Tablero extends JPanel{
     
     private Tanque tanque;
-
+    private Obstaculo obs;
+    
     public Tablero() {
         tanque = new Tanque(100,100,0,0,50,100,this);
+        obs = new Obstaculo(300,300,100,0,this); 
         this.addMouseMotionListener(tanque);
+        this.addMouseListener(tanque);
     }
 
     public Tanque getTanque() {
@@ -28,6 +31,7 @@ public class Tablero extends JPanel{
         Graphics2D g2= (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         this.tanque.paintComponent(g2);
+        this.obs.PaintComponent(g2);
     }
     
 }
