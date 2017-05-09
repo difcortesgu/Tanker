@@ -45,7 +45,7 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
 
     public final void initNewPanel() {
         this.addMouseListener(this);
-        this.initButton(this.JBjugar, "Jugar", BLACK, 60, 160, 40, 10);
+        this.initButton(this.JBjugar, "Jugar", BLACK, 260, 160, 80, 20);
         this.initButton(this.JBopciones, "Opciones", BLUE, 260, 210, 80, 20);
         this.initButton(this.JBcrear, "Crear", GREEN, 260, 260, 80, 20);
         this.initButton(this.JBentrar, "Entrar", RED, 260, 310, 80, 20);
@@ -54,11 +54,10 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
     public void initButton(JButton boton, String nombre, Color color, int x, int y, int width, int height) {
         boton = new JButton(nombre);
         this.add(boton);
-        boton.setLocation(x, y);
-        boton.setSize(width, height);
         boton.setForeground(color);
-        //boton.setBounds(x, y, width, height);
-        boton.setVisible(true);        
+        boton.setBounds(x, y, width, height);
+        boton.setVisible(true);
+        
     }
 
     @Override
