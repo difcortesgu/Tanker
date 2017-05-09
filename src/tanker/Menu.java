@@ -36,8 +36,15 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
     private int x;
 
     private JButton JBjugar, JBopciones, JBcrear, JBentrar;
+    private JLabel JLtanker;
+    
+    private final GridBagConstraints limites;
 
     public NewPanel() {
+        super(new GridBagLayout());
+        this.limites = new GridBagConstraints();
+        this.limites.gridx = 0;
+        this.limites.gridy = 0;
         this.initNewPanel();
         timer = new Timer(25, this);
         timer.start();
@@ -45,26 +52,34 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
 
     public final void initNewPanel() {
         this.addMouseListener(this);
-        this.initButton(this.JBjugar, "Jugar", BLACK, 260, 160, 80, 20);
-        this.initButton(this.JBopciones, "Opciones", BLUE, 260, 210, 80, 20);
-        this.initButton(this.JBcrear, "Crear", GREEN, 260, 260, 80, 20);
-        this.initButton(this.JBentrar, "Entrar", RED, 260, 310, 80, 20);
+        this.initLabel(this.JLtanker, "TANKER");
+        this.initButton(this.JBjugar, "Jugar");
+        this.initButton(this.JBopciones, "Opciones");
+        this.initButton(this.JBcrear, "Crear");
+        this.initButton(this.JBentrar, "Entrar");
     }
 
-    public void initButton(JButton boton, String nombre, Color color, int x, int y, int width, int height) {
-        boton = new JButton(nombre);
-        this.add(boton);
-        boton.setForeground(color);
-        boton.setBounds(x, y, width, height);
+    public void initButton(JButton boton, String nombre) {
+        this.limites.insets = new Insets(10, 10, 10, 10);
+        boton = new JButton(nombre);        
+        this.add(boton, this.limites);
         boton.setVisible(true);
-        
+        this.limites.gridy++;
+    }
+    
+    public void initLabel(JLabel label, String nombre) {
+        this.limites.insets = new Insets(20, 20, 20, 20);
+        label = new JLabel(nombre);        
+        this.add(label, this.limites);
+        label.setVisible(true);
+        this.limites.gridy++;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.drawString("TANKER", 280, 50);
+//        g.drawString("TANKER", 280, 50);
 
 //        g.drawString("Jugar", 285, 175);
 //        g.drawString("Opciones", 275, 225);
