@@ -18,9 +18,19 @@ public abstract class Elemento implements ActionListener{
         this.vida = vida;
         this.tablero = tablero;
         this.a=0;
-        timer= new Timer(7,this);
+        timer= new Timer(10,this);
         timer.start();
     }
+
+    public Elemento(double x, double y, double tamaño, double vida, Tablero tablero) {
+        this.x = x;
+        this.y = y;
+        this.tamaño = tamaño;
+        this.vida = vida;
+        this.tablero = tablero;
+    }
+    
+    
 
 
     

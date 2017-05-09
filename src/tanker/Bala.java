@@ -1,6 +1,5 @@
 package tanker;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 
@@ -13,16 +12,15 @@ public class Bala extends Elemento{
         super(x, y, vx, vy, tamaño, vida, tablero);
         this.daño = daño;
     }
-    
-    
-    
+      
     public void actualizar(){
         x+=vx;
         y+=vy;
     }
     
+    @Override
     public boolean colision(){
-        return y>=tablero.getHeight() || y<=0 || x>=tablero.getWidth() || x<=0;
+        return false;
     }
 
     public void paintComponent(Graphics2D g){

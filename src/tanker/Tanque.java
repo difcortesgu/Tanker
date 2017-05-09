@@ -29,6 +29,7 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
         for(Bala i: balas){
             i.paintComponent(g);
         }
+        g.drawString(""+balas.size(), 10, 10);
     }
 
     public ArrayList<Bala> getBalas() {
@@ -41,8 +42,8 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        dx=(mx-(x+tamaño));
-        dy=(my-(y+tamaño));
+        dx=(mx-(x+(tamaño/2)));
+        dy=(my-(y+(tamaño/2)));
         if(dx>0){
             a = Math.atan(dy/dx); 
         }else{
@@ -69,27 +70,23 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        balas.add(new Bala(daño,x,y,vx,vy,10,50,tablero));
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        balas.add(new Bala(daño,x+(tamaño/2),y+(tamaño/2),vx*2,vy*2,10,50,tablero));
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
