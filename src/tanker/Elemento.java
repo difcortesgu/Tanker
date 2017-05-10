@@ -21,18 +21,14 @@ public abstract class Elemento implements ActionListener{
         timer= new Timer(10,this);
         timer.start();
     }
-
+    
     public Elemento(double x, double y, double tamaño, double vida, Tablero tablero) {
         this.x = x;
         this.y = y;
         this.tamaño = tamaño;
         this.vida = vida;
         this.tablero = tablero;
-    }
-    
-    
-
-
+    } 
     
     public abstract boolean colision();
 
@@ -51,7 +47,6 @@ public abstract class Elemento implements ActionListener{
     public void setTamaño(double tamaño) {
         this.tamaño = tamaño;
     }
-
     
     public double getX() {
         return x;

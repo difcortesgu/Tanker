@@ -6,6 +6,7 @@
 package tanker;
 
 import java.awt.*;
+import static java.awt.Color.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -14,11 +15,11 @@ import javax.swing.*;
  * @author Familia
  */
 public class Menu extends JFrame {
-    
+
     public Menu() {
-        add (new NewPanel());
+        add(new NewPanel());
     }
-    
+
     public static void main(String[] args) {
         Menu frame = new Menu();
         frame.setTitle("Tanker");
@@ -29,34 +30,68 @@ public class Menu extends JFrame {
     }
 }
 
-class NewPanel extends JPanel implements ActionListener, MouseListener{
-    
-    private Timer timer;
+class NewPanel extends JPanel implements ActionListener, MouseListener {
+
+    private final Timer timer;
     private int x;
+
+    private JButton JBjugar, JBopciones, JBcrear, JBentrar;
+    private JLabel JLtanker;
     
+    private final GridBagConstraints limites;
+
     public NewPanel() {
-        this.addMouseListener(this);
+        super(new GridBagLayout());
+        this.limites = new GridBagConstraints();
+        this.limites.gridx = 0;
+        this.limites.gridy = 0;
+        this.initNewPanel();
         timer = new Timer(25, this);
         timer.start();
     }
+
+    public final void initNewPanel() {
+        this.addMouseListener(this);
+        this.initLabel(this.JLtanker, "TANKER");
+        this.initButton(this.JBjugar, "Jugar");
+        this.initButton(this.JBopciones, "Opciones");
+        this.initButton(this.JBcrear, "Crear");
+        this.initButton(this.JBentrar, "Entrar");
+    }
+
+    public void initButton(JButton boton, String nombre) {
+        this.limites.insets = new Insets(10, 10, 10, 10);
+        boton = new JButton(nombre);        
+        this.add(boton, this.limites);
+        boton.setVisible(true);
+        this.limites.gridy++;
+    }
     
+    public void initLabel(JLabel label, String nombre) {
+        this.limites.insets = new Insets(20, 20, 20, 20);
+        label = new JLabel(nombre);        
+        this.add(label, this.limites);
+        label.setVisible(true);
+        this.limites.gridy++;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-        g.drawString("TANKER", 280, 50);
-        
-        g.drawString("Jugar", 285, 175);
-        g.drawString("Opciones", 275, 225);
-        
-        g.drawRect(260, 160, 80, 20); //Rectangulo alrededor de "Jugar"
-        g.drawRect(260, 210, 80, 20); //Rectangulo alrededor de "Opciones"
-        
-        g.drawString("Crear", 285, 175);
-        g.drawString("Entrar", 285, 225);
-        
-        g.drawRect(260, 160, 80, 20); //Rectangulo alrededor de "Crear"
-        g.drawRect(260, 210, 80, 20); //Rectangulo alrededor de "Entrar"
+
+//        g.drawString("TANKER", 280, 50);
+
+//        g.drawString("Jugar", 285, 175);
+//        g.drawString("Opciones", 275, 225);
+//
+//        g.drawRect(260, 160, 80, 20); //Rectangulo alrededor de "Jugar"
+//        g.drawRect(260, 210, 80, 20); //Rectangulo alrededor de "Opciones"
+//
+//        g.drawString("Crear", 285, 175);
+//        g.drawString("Entrar", 285, 225);
+//
+//        g.drawRect(260, 160, 80, 20); //Rectangulo alrededor de "Crear"
+//        g.drawRect(260, 210, 80, 20); //Rectangulo alrededor de "Entrar"
     }
 
     @Override
@@ -68,7 +103,7 @@ class NewPanel extends JPanel implements ActionListener, MouseListener{
     }
 
     @Override
-    public void mousePressed(MouseEvent e) { 
+    public void mousePressed(MouseEvent e) {
     }
 
     @Override
