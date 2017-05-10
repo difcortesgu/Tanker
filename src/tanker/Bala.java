@@ -7,20 +7,34 @@ public class Bala extends Elemento{
 
     
     private double daño;
+    private Tanque tanque;
 
-    public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida, Tablero tablero) {
+    public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida,Tanque tanque, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
         this.daño = daño;
+        this.tanque=tanque;
     }
-      
-    public void actualizar(){
-        x+=vx;
-        y+=vy;
+
+    public double getDaño() {
+        return daño;
     }
+
+    public void setDaño(double daño) {
+        this.daño = daño;
+    }
+
+    public Tanque getTanque() {
+        return tanque;
+    }
+
+    public void setTanque(Tanque tanque) {
+        this.tanque = tanque;
+    }
+    
     
     @Override
     public boolean colision(){
-        return false;
+        return x<0 || x>tablero.getWidth() || y<0 || y>tablero.getHeight();
     }
 
     public void paintComponent(Graphics2D g){

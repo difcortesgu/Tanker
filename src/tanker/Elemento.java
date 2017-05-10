@@ -1,5 +1,6 @@
 package tanker;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
@@ -27,7 +28,9 @@ public abstract class Elemento implements ActionListener{
         this.y = y;
         this.tamaño = tamaño;
         this.vida = vida;
-        this.tablero = tablero;
+        this.tablero = tablero; 
+        timer= new Timer(10,this);
+        timer.start();
     } 
     
     public abstract boolean colision();
@@ -87,6 +90,25 @@ public abstract class Elemento implements ActionListener{
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
     }
+
+    public double getVida() {
+        return vida;
+    }
+
+    public void setVida(double vida) {
+        this.vida = vida;
+    }
     
+    public Rectangle getBounds(){
+        return new Rectangle((int)x, (int)y, (int)tamaño, (int)tamaño);
+    }
+    
+    public boolean die(){
+        return vida<=0;
+    }
+    
+    public void borrar() throws Throwable{
+        this.finalize();
+    }
     
 }
