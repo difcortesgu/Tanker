@@ -2,8 +2,6 @@ package tanker;
 
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Obstaculo extends Elemento{
 
@@ -12,30 +10,21 @@ public class Obstaculo extends Elemento{
         super(x, y, tamaño, vida, tablero);
     }
 
-    public void colision2() throws Throwable {
-
-        for (Elemento i: tablero.getElementos()) {
-            
-            if(i instanceof Tanque){
-                for (Bala j:((Tanque) i).getBalas()) {
-                    
-                if(j.getBounds().intersects(this.getBounds())){
-                    ((Tanque) i).eliminar_bala(j);
-                    vida--;
-                }
-                }
-            }
-        }
-        
-    }
-
+    //cambie los 2 ciclos porque con los anteriores no estaba eliminando el objeto
+    //y elimine el metodo Colision2 porque se podia simplemente colocar en el actionPerformed
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            colision2();
-        } catch (Throwable ex) {
-            Logger.getLogger(Obstaculo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    
+        for (int i=0;i<tablero.getElementos().size();i++) {
+            if(tablero.getElementos().get(i) instanceof Tanque){
+                for(int j=0;j<((Tanque)(tablero.getElementos().get(i))).getBalas().size();j++){
+                    if(((Tanque)(tablero.getElementos().get(i))).getBalas().get(j).getBounds().intersects(this.getBounds())){
+                        ((Tanque)(tablero.getElementos().get(i))).eliminar_bala(j);
+                        vida--;
+                    }
+                }
+            }
+        }     
     }
     
     public void PaintComponent(Graphics2D g){

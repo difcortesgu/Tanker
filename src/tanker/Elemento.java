@@ -2,6 +2,8 @@ package tanker;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
 
 public abstract class Elemento implements ActionListener{
@@ -107,8 +109,16 @@ public abstract class Elemento implements ActionListener{
         return vida<=0;
     }
     
-    public void borrar() throws Throwable{
-        this.finalize();
-    }
+    //Cambie el metodo borrar por Finalize y capture la excepcion dentro del mismo metodo
+    @Override
+    public void finalize(){
+        timer.stop();
+        try {
+            super.finalize();
+        } catch (Throwable ex) {
+            Logger.getLogger(Elemento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    } 
     
 }

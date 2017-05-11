@@ -40,11 +40,7 @@ public class Bala extends Elemento{
     public void paintComponent(Graphics2D g){
         g.fillOval((int)x, (int)y, (int)tamaño, (int)tamaño);
     }
-    
-    public void borrar() throws Throwable{
-        this.finalize();
-    }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         x+=vx;
