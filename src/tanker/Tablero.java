@@ -16,7 +16,7 @@ public class Tablero extends JPanel implements ActionListener{
     
     
     private ArrayList<Elemento> elementos;
-    private Timer timer;//Añadi un timer para controlar el metodo repaint desde el tablero
+    private final Timer timer;//Añadi un timer para controlar el metodo repaint desde el tablero
     
     public Tablero() {
         elementos = new ArrayList();
