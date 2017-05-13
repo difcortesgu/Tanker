@@ -1,22 +1,26 @@
 package tanker;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import static java.lang.Math.PI;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 public class Tanque extends Elemento implements MouseMotionListener,MouseListener{
 
     double dx,dy,mx,my,daño;
     private ArrayList<Bala> balas;
+    Image tanque;
 
     public Tanque(double x, double y, double vx, double vy, double tamaño, double vida, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
         daño=50;
         balas= new ArrayList();
+        
     }
 
 
@@ -26,6 +30,8 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
     }
     
     public void paintComponent(Graphics2D g){
+        tanque= loadImage("t1.png");
+        g.drawImage(tanque, (int)x, (int)y,(int)(tamaño), (int)(tamaño), tablero);
         g.drawRect((int)x, (int)y, (int)tamaño, (int)tamaño);
         for(Bala i:balas){
             i.paintComponent(g);
@@ -108,4 +114,10 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
     public void mouseExited(MouseEvent e) {
     }
     
+    public Image loadImage(String imageName){
+        ImageIcon ii= new ImageIcon (imageName);
+        Image image = ii.getImage();
+         
+        return image;
+    }
 }
