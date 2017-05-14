@@ -32,7 +32,7 @@ public class Menu extends JFrame {
 
 class NewPanel extends JPanel implements ActionListener, MouseListener {
 
-    private final Timer timer;
+    //private final Timer timer;
     private int x;
 
     private JButton JBjugar, JBopciones, JBcrear, JBentrar;
@@ -46,8 +46,8 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
         this.limites.gridx = 0;
         this.limites.gridy = 0;
         this.initNewPanel();
-        timer = new Timer(25, this);
-        timer.start();
+        //timer = new Timer(25, this);
+        //timer.start();
     }
 
     public final void initNewPanel() {
@@ -74,10 +74,19 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
         label.setVisible(true);
         this.limites.gridy++;
     }
+    
+    public Image loadImage (String imageName) {
+        ImageIcon ii = new ImageIcon (imageName);
+        Image image = ii.getImage();
+        return image;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+        Image Fondo = loadImage ("Menu.png");
+        g.drawImage(Fondo, 0, 0, null);
 
 //        g.drawString("TANKER", 280, 50);
 
