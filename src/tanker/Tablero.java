@@ -20,7 +20,7 @@ public class Tablero extends JPanel implements ActionListener{
     
     public Tablero() {
         elementos = new ArrayList();
-        elementos.add(new Tanque(100,100,0,0,50,100,this));
+        elementos.add(new Tanque(100,100,0,0,128,100,this));
         elementos.add(new Obstaculo(300,300,100,10,this));
         this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
         this.addMouseListener((MouseListener) elementos.get(0));
@@ -52,7 +52,7 @@ public class Tablero extends JPanel implements ActionListener{
             }
         }
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         //cambie los bucles que comproueban las colisiones para poder eliminar los objetos
