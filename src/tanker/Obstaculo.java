@@ -16,7 +16,9 @@ public class Obstaculo extends Elemento{
     public void actionPerformed(ActionEvent e) {
     
         for (int i=0;i<tablero.getElementos().size();i++) {
+            
             if(tablero.getElementos().get(i) instanceof Tanque){
+                
                 for(int j=0;j<((Tanque)(tablero.getElementos().get(i))).getBalas().size();j++){
                     if(((Tanque)(tablero.getElementos().get(i))).getBalas().get(j).getBounds().intersects(this.getBounds())){
                         ((Tanque)(tablero.getElementos().get(i))).eliminar_bala(j);
@@ -24,6 +26,7 @@ public class Obstaculo extends Elemento{
                     }
                 }
             }
+            
         }     
     }
     

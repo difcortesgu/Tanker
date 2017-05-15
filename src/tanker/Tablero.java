@@ -24,12 +24,14 @@ public class Tablero extends JPanel implements ActionListener{
     public Tablero() {
         elementos = new ArrayList();
         elementos.add(new Tanque(770,500,0,0,128,100,this));
-        elementos.add(new Obstaculo(300,300,100,10,this));
+        elementos.add(new Obstaculo(300,300,200,10,this));
+        elementos.add(new Obstaculo(700,500,100,10,this));
+        elementos.add(new Obstaculo(800,100,50,10,this));
         this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
         this.addMouseListener((MouseListener) elementos.get(0));
         timer = new Timer(1,this);
         timer.start();        
-        a=-90+Math.random()%2*PI;
+        a=(Math.random()-Math.random())%2*PI;
         dvx=0;
         dvy=0;
     }

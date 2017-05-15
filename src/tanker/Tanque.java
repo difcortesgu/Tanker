@@ -27,13 +27,23 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
 
     @Override
     public boolean colision(){
-        return y+vy<tablero.getHeight()-tamaño || y+vy<=0 || x+vx<tablero.getWidth()- tamaño || x+vx>0;
+        for(Elemento i: tablero.getElementos()){
+            if (i instanceof Obstaculo){
+                if(this.getBounds().intersects(i.getBounds())){
+                    vx*=-1;
+                    vy*=-1;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     public void paintComponent(Graphics2D g){
         tanque = loadImage("Orugas.png");
         this.pintarTanque(g);
         g.drawRect((int)x, (int)y, (int)tamaño, (int)tamaño);
+        g.drawLine((int)(x+tamaño/2), (int)(y+tamaño/2), (int)((x+tamaño/2)+(100*Math.cos(a))), (int)((y+tamaño/2)+(100*Math.sin(a))));
         balas.forEach((i) -> {
             i.paintComponent(g);
         });
@@ -103,8 +113,10 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
         }else{
             a = Math.atan(dy/dx)+PI; 
         }
-        vx=Math.cos(a);
-        vy=Math.sin(a);            
+        if(!colision()){
+            vx=Math.cos(a);
+            vy=Math.sin(a);           
+        }
         //se comprueba si la distancia al punto el mouse es menor a 1 
         //para dejar quieto el tanque si este esta muy cerca del punto del mouse pero sin hacer las 
         //velocidades igual a 0
@@ -126,7 +138,9 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
     public void mouseDragged(MouseEvent e) {
         mx=e.getX();
         my=e.getY();
-        balas.add(new Bala(daño,x+(tamaño/2),y+(tamaño/2),vx*2,vy*2,10,50,this,tablero));
+        int x1 = (int)((x+tamaño/2)+(100*Math.cos(a)));
+        int y1 = (int)((y+tamaño/2)+(100*Math.sin(a)));
+        balas.add(new Bala(daño,x1,y1,vx*2,vy*2,10,50,this,tablero));
     }
 
     @Override
@@ -141,7 +155,9 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
 
     @Override
     public void mousePressed(MouseEvent e) {
-        balas.add(new Bala(daño,x+(tamaño/2),y+(tamaño/2),vx*2,vy*2,10,50,this,tablero));
+        int x1 = (int)((x+tamaño/2)+(100*Math.cos(a)));
+        int y1 = (int)((y+tamaño/2)+(100*Math.sin(a)));
+        balas.add(new Bala(daño,x1,y1,vx*2,vy*2,10,50,this,tablero));
     }
 
     @Override

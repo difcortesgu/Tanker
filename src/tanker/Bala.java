@@ -49,8 +49,8 @@ public class Bala extends Elemento{
         tablero.dvx=Math.cos(a);
         tablero.dvy=Math.sin(a);
        
-            vx+=tablero.dvx/500;
-            vy+=tablero.dvy/500;
+        vx+=tablero.dvx/500;
+        vy+=tablero.dvy/500;
         
         x+=vx;
         y+=vy;
