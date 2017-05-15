@@ -37,12 +37,13 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
         balas.forEach((i) -> {
             i.paintComponent(g);
         });
+        g.drawString(""+balas.size(), 10, 10);
     }
 
     public void pintarTanque(Graphics2D g){
         a=Math.toDegrees(a);
         
-        if(Math.abs(dx)>1 || Math.abs(dy)>1){
+        if(Math.abs(dx)>1 || Math.abs(dy)>1){           
             if(contador==1){
                 contador=0;
             }else{
@@ -125,6 +126,7 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
     public void mouseDragged(MouseEvent e) {
         mx=e.getX();
         my=e.getY();
+        balas.add(new Bala(daño,x+(tamaño/2),y+(tamaño/2),vx*2,vy*2,10,50,this,tablero));
     }
 
     @Override

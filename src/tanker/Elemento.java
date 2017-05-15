@@ -21,7 +21,7 @@ public abstract class Elemento implements ActionListener{
         this.vida = vida;
         this.tablero = tablero;
         this.a=0;
-        timer= new Timer(20,this);
+        timer= new Timer(10,this);
         timer.start();
     }
     
