@@ -15,6 +15,7 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
     double dx,dy,mx,my,daño;
     private ArrayList<Bala> balas;
     Image tanque;
+    int contador = 0;
 
     public Tanque(double x, double y, double vx, double vy, double tamaño, double vida, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
@@ -30,12 +31,12 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
     }
     
     public void paintComponent(Graphics2D g){
-        tanque= loadImage("t1.png");
-        g.drawImage(tanque, (int)x, (int)y,(int)(tamaño), (int)(tamaño), tablero);
+        tanque = loadImage("Orugas.png");
+        g.drawImage(tanque, (int)x, (int)y,(int)(x + tamaño), (int)(y + tamaño), 0, 0, 181, 181, tablero);
         g.drawRect((int)x, (int)y, (int)tamaño, (int)tamaño);
-        for(Bala i:balas){
+        balas.forEach((i) -> {
             i.paintComponent(g);
-        }
+        });
         g.drawString(""+balas.size(), 10, 10);
     }
 

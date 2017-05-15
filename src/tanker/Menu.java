@@ -6,7 +6,6 @@
 package tanker;
 
 import java.awt.*;
-import static java.awt.Color.*;
 import java.awt.event.*;
 import javax.swing.*;
 
