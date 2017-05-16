@@ -4,10 +4,13 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 
 public class Obstaculo extends Elemento{
-
+    int c=0;
     
     public Obstaculo(double x, double y, double tamaño, double vida, Tablero tablero) {
         super(x, y, tamaño, vida, tablero);
+        vx=0;
+        vy=0;
+        
     }
 
     //cambie los 2 ciclos porque con los anteriores no estaba eliminando el objeto
@@ -27,7 +30,23 @@ public class Obstaculo extends Elemento{
                 }
             }
             
-        }     
+        }   
+        if(x>700||x<-100){
+            vx*=-1;
+        }
+        if(y>700||y<-100){
+            vy*=-1;
+        }
+        if( c==50){
+            vx=5*(Math.random()-Math.random());
+            vy= 5*(Math.random()-Math.random());
+            c=0;
+        }
+        
+        
+        x+=vx;
+        y+=vy;
+        c++;
     }
     
     public void PaintComponent(Graphics2D g){

@@ -24,7 +24,14 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
         
     }
 
-
+    @Override
+    public boolean die(){
+        if( vida==0){
+          this.finalize();  
+        }
+        
+        return false;
+    }
     @Override
     public boolean colision(){
         for(Elemento i: tablero.getElementos()){
@@ -32,6 +39,7 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
                 if(this.getBounds().intersects(i.getBounds())){
                     vx*=-1;
                     vy*=-1;
+                    vida--;
                     return true;
                 }
             }
@@ -88,6 +96,7 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
                         0+(181*contador), 181, 181+(181*contador), 181*2, tablero);
         }    
         a=Math.toRadians(a);
+        g.drawString("vida: "+vida, 100, 100);
     }
     
     //cambie el parametro por un entero para eliminar la bala del arreglo
@@ -132,15 +141,18 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
                 eliminar_bala(i);
             }
         }
+        this.die();
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        /*
         mx=e.getX();
         my=e.getY();
         int x1 = (int)((x+tamaño/2)+(100*Math.cos(a)));
         int y1 = (int)((y+tamaño/2)+(100*Math.sin(a)));
         balas.add(new Bala(daño,x1,y1,vx*2,vy*2,10,50,this,tablero));
+        */
     }
 
     @Override
