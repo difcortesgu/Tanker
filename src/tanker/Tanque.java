@@ -2,6 +2,7 @@ package tanker;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,35 +11,37 @@ import static java.lang.Math.PI;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-public class Tanque extends Elemento implements MouseMotionListener,MouseListener{
+public class Tanque extends Elemento implements MouseMotionListener, MouseListener {
 
-    double dx,dy,mx,my,daño;
+    double dx, dy, mx, my, daño;
     private ArrayList<Bala> balas;
-    Image tanque;
-    int contador = 0;
+    private Image tanque;
+    private int contador = 0;
+    private int TipoOruga; //para seleccionar qué tipo de oruga tendrá
 
-    public Tanque(double x, double y, double vx, double vy, double tamaño, double vida, Tablero tablero) {
+    public Tanque(double x, double y, double vx, double vy, double tamaño, int tipo, double vida, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
-        daño=50;
-        balas= new ArrayList();
-        
+        daño = 50;
+        balas = new ArrayList();
+        this.TipoOruga = tipo;
     }
 
     @Override
-    public boolean die(){
-        if( vida==0){
-          this.finalize();  
+    public boolean die() {
+        if (vida == 0) {
+            this.finalize();
         }
-        
+
         return false;
     }
+
     @Override
-    public boolean colision(){
-        for(Elemento i: tablero.getElementos()){
-            if (i instanceof Obstaculo){
-                if(this.getBounds().intersects(i.getBounds())){
-                    vx*=-1;
-                    vy*=-1;
+    public boolean colision() {
+        for (Elemento i : tablero.getElementos()) {
+            if (i instanceof Obstaculo) {
+                if (this.getBounds().intersects(i.getBounds())) {
+                    vx *= -1;
+                    vy *= -1;
                     vida--;
                     return true;
                 }
@@ -46,65 +49,83 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
         }
         return false;
     }
-    
-    public void paintComponent(Graphics2D g){
-        tanque = loadImage("Orugas.png");
+
+    public void paintComponent(Graphics2D g) {
         this.pintarTanque(g);
-        g.drawRect((int)x, (int)y, (int)tamaño, (int)tamaño);
-        g.drawLine((int)(x+tamaño/2), (int)(y+tamaño/2), (int)((x+tamaño/2)+(100*Math.cos(a))), (int)((y+tamaño/2)+(100*Math.sin(a))));
+        g.drawRect((int) x, (int) y, (int) tamaño, (int) tamaño);
+        g.drawLine((int) (x + tamaño / 2), (int) (y + tamaño / 2), (int) ((x + tamaño / 2) + (100 * Math.cos(a))), (int) ((y + tamaño / 2) + (100 * Math.sin(a))));
         balas.forEach((i) -> {
             i.paintComponent(g);
         });
-        g.drawString(""+balas.size(), 10, 10);
+        g.drawString("" + balas.size(), 10, 10);
     }
 
-    public void pintarTanque(Graphics2D g){
-        a=Math.toDegrees(a);
-        
-        if(Math.abs(dx)>1 || Math.abs(dy)>1){           
-            if(contador==1){
-                contador=0;
-            }else{
+    public void pintarTanque(Graphics2D g) {
+
+        tanque = loadImage("Orugas.png");
+
+        a = Math.toDegrees(a);
+
+        if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
+            if (contador == 1) {
+                contador = 0;
+            } else {
                 contador++;
             }
         }
-        
-        if((Math.abs(a)<=15) || (a>=165 && a<195)){
-            g.drawImage(tanque, (int)x, (int)y,(int)(x + tamaño), (int)(y + tamaño),
-                        0+(181*contador), 181*4, 181+(181*contador), 181*5, tablero);            
-        }else if((a>15 && a<40) || (a>=195 && a<220)){
-            g.drawImage(tanque, (int)(x+tamaño), (int)y,(int)x, (int)(y + tamaño),
-                        0+(181*contador), 181*3, 181+(181*contador), 181*4, tablero);                        
-        }else if((a>=40 && a<50) || (a>=220 && a<230)){
-            g.drawImage(tanque, (int)(x+tamaño), (int)y,(int)x, (int)(y + tamaño),
-                        0+(181*contador), 181*2, 181+(181*contador), 181*3, tablero);                                    
-        }else if((a>=50 && a<75) || (a>=230 && a<255)){
-            g.drawImage(tanque, (int)(x+tamaño), (int)y,(int)x, (int)(y + tamaño),
-                        0+(181*contador), 181, 181+(181*contador), 181*2, tablero);                                                
-        }else if((a>=75 && a<105) || (a>=255 && a<270) || (a>=-90 && a<-75)){
-            g.drawImage(tanque, (int)(x+tamaño), (int)y,(int)x, (int)(y + tamaño),
-                        0+(181*contador), 0, 181+(181*contador), 181, tablero);
+
+        if ((Math.abs(a) <= 7.5) || (a >= 172.5 && a < 187.5)) {
+            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 6, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 7, tablero);
+        } else if ((a > 7.5 && a < 22.5) || (a >= 187.5 && a < 202.5)) {
+            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 5, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 6, tablero);
+        } else if ((a >= 22.5 && a < 37.5) || (a >= 202.5 && a < 217.5)) {
+            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 4, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 5, tablero);
+        } else if ((a >= 37.5 && a < 52.5) || (a >= 217.5 && a < 232.5)) {
+            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 3, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 4, tablero);
+        } else if ((a >= 52.5 && a < 67.5) || (a >= 232.5 && a < 247.5)) {
+            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 2, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 3, tablero);
+        } else if ((a >= 67.5 && a < 82.5) || (a >= 247.5 && a < 262.5)) {
+            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 2, tablero);
+        } else if ((a >= 82.5 && a < 97.5) || (a >= 262.5 && a <= 270) || (a >= -90 && a < -82.5)) {
+            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 0, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181, tablero);
             //cuadrantes 1 y 3;            
-        }else if((a>=105 && a<130) || (a>=-75 && a<-50)){
-            g.drawImage(tanque, (int)x, (int)y,(int)(x + tamaño), (int)(y + tamaño),
-                        0+(181*contador), 181, 181+(181*contador), 181*2, tablero);                        
-        }else if((a>=130 && a<140) || (a>=-50 && a<-40)){
-            g.drawImage(tanque, (int)x, (int)y,(int)(x + tamaño), (int)(y + tamaño),
-                        0+(181*contador), 181*2, 181+(181*contador), 181*3, tablero);                                    
-        }else if((a>=140 && a<165) || (a>=-40 && a<-15)){
-            g.drawImage(tanque, (int)x, (int)y,(int)(x+ tamaño), (int)(y + tamaño),
-                        0+(181*contador), 181, 181+(181*contador), 181*2, tablero);
-        }    
-        a=Math.toRadians(a);
-        g.drawString("vida: "+vida, 100, 100);
+        } else if ((a >= 97.5 && a < 112.5) || (a >= -82.5 && a < -67.5)) {
+            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 2, tablero);
+        } else if ((a >= 112.5 && a < 127.5) || (a >= -67.5 && a < -52.5)) {
+            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 2, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 3, tablero);
+        } else if ((a >= 127.5 && a < 142.5) || (a >= -52.5 && a < -37.5)) {
+            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 3, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 4, tablero);
+        } else if ((a >= 142.5 && a < 157.5) || (a >= -37.5 && a < -22.5)) {
+            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 4, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 5, tablero);
+        } else if ((a >= 157.5 && a < 172.5) || (a >= -22.5 && a < -7.5)) {
+            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño),
+                    (this.TipoOruga * 2 * 181) + (181 * contador), 181 * 5, (this.TipoOruga * 2 * 181) + (181 * contador) + 181, 181 * 6, tablero);
+        }
+        a = Math.toRadians(a);
+        g.drawString("vida: " + vida, 100, 100);
     }
-    
+
+    public Rectangle getRectangle() {
+        return new Rectangle((int) x, (int) y, (int) tamaño, (int) tamaño);
+    }
+
     //cambie el parametro por un entero para eliminar la bala del arreglo
-    public void eliminar_bala(int i){
+    public void eliminar_bala(int i) {
         balas.get(i).finalize();
-        balas.remove(i);   
+        balas.remove(i);
     }
-    
+
     public ArrayList<Bala> getBalas() {
         return balas;
     }
@@ -115,29 +136,29 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        dx=(mx-(x+(tamaño/2)));
-        dy=(my-(y+(tamaño/2)));
-        if(dx>0){
-            a = Math.atan(dy/dx); 
-        }else{
-            a = Math.atan(dy/dx)+PI; 
+        dx = (mx - (x + (tamaño / 2)));
+        dy = (my - (y + (tamaño / 2)));
+        if (dx > 0) {
+            a = Math.atan(dy / dx);
+        } else {
+            a = Math.atan(dy / dx) + PI;
         }
-        if(!colision()){
-            vx=Math.cos(a);
-            vy=Math.sin(a);           
+        if (!colision()) {
+            vx = Math.cos(a);
+            vy = Math.sin(a);
         }
         //se comprueba si la distancia al punto el mouse es menor a 1 
         //para dejar quieto el tanque si este esta muy cerca del punto del mouse pero sin hacer las 
         //velocidades igual a 0
-        if(Math.abs(dx)>1 || Math.abs(dy)>1){
-            x+=vx;
-            y+=vy;
+        if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
+            x += vx;
+            y += vy;
         }
-        
+
         //cambie el bucle para poder eliminar las balas
         //y lo coloque en el metodo actionPerformed en vez del metodo PaintComponent 
-        for(int i=0;i<balas.size();i++){
-            if(balas.get(i).colision()){
+        for (int i = 0; i < balas.size(); i++) {
+            if (balas.get(i).colision()) {
                 eliminar_bala(i);
             }
         }
@@ -152,24 +173,31 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
         int x1 = (int)((x+tamaño/2)+(100*Math.cos(a)));
         int y1 = (int)((y+tamaño/2)+(100*Math.sin(a)));
         balas.add(new Bala(daño,x1,y1,vx*2,vy*2,10,50,this,tablero));
-        */
+         */
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mx=e.getX();
-        my=e.getY();
+        mx = e.getX();
+        my = e.getY();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (this.getRectangle().contains(e.getPoint())) {
+            if (this.TipoOruga == 1) {
+                this.TipoOruga = 0;
+            } else {
+                this.TipoOruga++;
+            }
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int x1 = (int)((x+tamaño/2)+(100*Math.cos(a)));
-        int y1 = (int)((y+tamaño/2)+(100*Math.sin(a)));
-        balas.add(new Bala(daño,x1,y1,vx*2,vy*2,10,50,this,tablero));
+        int x1 = (int) ((x + tamaño / 2) + (100 * Math.cos(a)));
+        int y1 = (int) ((y + tamaño / 2) + (100 * Math.sin(a)));
+        balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this, tablero));
     }
 
     @Override
@@ -183,11 +211,11 @@ public class Tanque extends Elemento implements MouseMotionListener,MouseListene
     @Override
     public void mouseExited(MouseEvent e) {
     }
-    
-    public Image loadImage(String imageName){
-        ImageIcon ii= new ImageIcon (imageName);
+
+    public Image loadImage(String imageName) {
+        ImageIcon ii = new ImageIcon(imageName);
         Image image = ii.getImage();
-         
+
         return image;
     }
 }
