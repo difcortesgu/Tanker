@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import static java.lang.Math.PI;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
@@ -17,15 +18,22 @@ public class Tablero extends JPanel implements ActionListener{
     
     private ArrayList<Elemento> elementos;
     private final Timer timer;//Añadi un timer para controlar el metodo repaint desde el tablero
+    public double a,dvx,dvy;
+    
     
     public Tablero() {
         elementos = new ArrayList();
-        elementos.add(new Tanque(100,100,0,0,50,100,this));
-        elementos.add(new Obstaculo(300,300,100,10,this));
+        elementos.add(new Tanque(770,500,0,0,128,1000,this));
+        elementos.add(new Obstaculo(300,300,200,10,this));
+        elementos.add(new Obstaculo(700,500,100,10,this));
+        elementos.add(new Obstaculo(800,100,50,10,this));
         this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
         this.addMouseListener((MouseListener) elementos.get(0));
         timer = new Timer(1,this);
-        timer.start();
+        timer.start();        
+        a=(Math.random()-Math.random())%2*PI;
+        dvx=0;
+        dvy=0;
     }
 
     public ArrayList<Elemento> getElementos() {
@@ -42,7 +50,7 @@ public class Tablero extends JPanel implements ActionListener{
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-
+        g2.drawLine(400, 100, 400+(int)(100*Math.cos(a)), 100+(int)(100*Math.sin(a)));
         for(Elemento i: elementos){
             if(i instanceof Tanque){
                 ((Tanque) i).paintComponent(g2);
@@ -52,7 +60,7 @@ public class Tablero extends JPanel implements ActionListener{
             }
         }
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         //cambie los bucles que comproueban las colisiones para poder eliminar los objetos
@@ -62,6 +70,7 @@ public class Tablero extends JPanel implements ActionListener{
                 elementos.remove(i);
             }
         }
+        a=(Math.random()-Math.random())%2*PI;
         this.repaint();
     }
     

@@ -8,11 +8,13 @@ public class Bala extends Elemento{
     
     private double daño;
     private Tanque tanque;
-
+    
     public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida,Tanque tanque, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
         this.daño = daño;
         this.tanque=tanque;
+        a=tablero.a;
+        timer.setDelay(5);
     }
 
     public double getDaño() {
@@ -43,6 +45,13 @@ public class Bala extends Elemento{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        tablero.dvx=Math.cos(a);
+        tablero.dvy=Math.sin(a);
+       
+        vx+=tablero.dvx/500;
+        vy+=tablero.dvy/500;
+        
         x+=vx;
         y+=vy;
     }

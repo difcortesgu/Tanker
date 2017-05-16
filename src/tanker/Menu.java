@@ -108,6 +108,8 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+         Main m= new Main();
+         
     }
 
     @Override

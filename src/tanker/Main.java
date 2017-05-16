@@ -13,7 +13,7 @@ public class Main extends JFrame{
     public static void main(String[] args) throws InterruptedException {
         Main j = new Main();
         j.setTitle("Tanker");
-        j.setSize(500,500);
+        j.setSize(1000,700);
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         j.setLocationRelativeTo(null);
         j.setVisible(true);
