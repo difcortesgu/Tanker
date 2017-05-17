@@ -62,6 +62,7 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
         this.limites.insets = new Insets(10, 10, 10, 10);
         boton = new JButton(nombre);        
         this.add(boton, this.limites);
+        boton.addActionListener(this);
         boton.setVisible(true);
         this.limites.gridy++;
     }
@@ -104,16 +105,16 @@ class NewPanel extends JPanel implements ActionListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Main m= new Main();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-         Main m= new Main();
-         
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        
     }
 
     @Override
