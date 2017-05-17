@@ -115,11 +115,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         a = Math.toRadians(a);
         g.drawString("vida: " + vida, 100, 100);
     }
-
-    public Rectangle getRectangle() {
-        return new Rectangle((int) x, (int) y, (int) tamaño, (int) tamaño);
-    }
-
+    
     //cambie el parametro por un entero para eliminar la bala del arreglo
     public void eliminar_bala(int i) {
         balas.get(i).finalize();
@@ -184,7 +180,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (this.getRectangle().contains(e.getPoint())) {
+        if (this.getBounds().contains(e.getPoint())) {
             if (this.TipoOruga == 1) {
                 this.TipoOruga = 0;
             } else {

@@ -3,6 +3,7 @@ package tanker;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import static java.lang.Math.PI;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 
@@ -19,14 +21,15 @@ public class Tablero extends JPanel implements ActionListener{
     private ArrayList<Elemento> elementos;
     private final Timer timer;//Añadi un timer para controlar el metodo repaint desde el tablero
     public double a,dvx,dvy;
+    private Image fondo;
     
     
     public Tablero() {
         elementos = new ArrayList();
         elementos.add(new Tanque(770,500,0,0,128,1,1000,this));
-        elementos.add(new Obstaculo(300,300,200,10,this));
-        elementos.add(new Obstaculo(700,500,100,10,this));
-        elementos.add(new Obstaculo(800,100,50,10,this));
+//        elementos.add(new Obstaculo(300,300,200,10,this));
+//        elementos.add(new Obstaculo(700,500,100,10,this));
+//        elementos.add(new Obstaculo(800,100,50,10,this));
         this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
         this.addMouseListener((MouseListener) elementos.get(0));
         timer = new Timer(1,this);
@@ -34,6 +37,7 @@ public class Tablero extends JPanel implements ActionListener{
         a=(Math.random()-Math.random())%2*PI;
         dvx=0;
         dvy=0;
+        
     }
 
     public ArrayList<Elemento> getElementos() {
@@ -50,6 +54,7 @@ public class Tablero extends JPanel implements ActionListener{
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        this.PaintFondo(g2);
         g2.drawLine(400, 100, 400+(int)(100*Math.cos(a)), 100+(int)(100*Math.sin(a)));
         for(Elemento i: elementos){
             if(i instanceof Tanque){
@@ -59,6 +64,11 @@ public class Tablero extends JPanel implements ActionListener{
                 ((Obstaculo) i).PaintComponent(g2);
             }
         }
+    }
+    
+    private void PaintFondo(Graphics2D g) {
+        fondo = this.loadImage("Camuflajes.png");        
+        g.drawImage(fondo, 0, 0, this.getWidth(), this.getHeight(), 0, 0, 128, 128, this);
     }
     
     @Override
@@ -74,5 +84,11 @@ public class Tablero extends JPanel implements ActionListener{
         this.repaint();
     }
     
+    public Image loadImage(String imageName) {
+        ImageIcon ii = new ImageIcon(imageName);
+        Image image = ii.getImage();
+
+        return image;
+    }   
     
 }
