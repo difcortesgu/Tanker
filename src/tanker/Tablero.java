@@ -27,10 +27,9 @@ public class Tablero extends JPanel implements ActionListener{
     public Tablero() {
         elementos = new ArrayList();
         elementos.add(new Tanque(770,500,0,0,128,1,1000,this));
-//        elementos.add(new Obstaculo(300,300,200,10,this));
-//        elementos.add(new Obstaculo(700,500,100,10,this));
-//        elementos.add(new Obstaculo(800,100,50,10,this));
-        this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
+        /*        elementos.add(new Obstaculo(300,300,200,10,this));
+        elementos.add(new Obstaculo(700,500,100,10,this));
+        elementos.add(new Obstaculo(800,100,50,10,this));*/        this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
         this.addMouseListener((MouseListener) elementos.get(0));
         timer = new Timer(1,this);
         timer.start();        
@@ -54,7 +53,7 @@ public class Tablero extends JPanel implements ActionListener{
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        this.PaintFondo(g2);
+        //this.PaintFondo(g2);
         g2.drawLine(400, 100, 400+(int)(100*Math.cos(a)), 100+(int)(100*Math.sin(a)));
         for(Elemento i: elementos){
             if(i instanceof Tanque){
