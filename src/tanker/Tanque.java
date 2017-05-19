@@ -54,7 +54,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     public void paintComponent(Graphics2D g) {
         this.pintarTanque(g);
         g.drawRect((int) x, (int) y, (int) tamaño, (int) tamaño);
-        g.drawLine((int) (x + tamaño / 2), (int) (y + tamaño / 2), (int) ((x + tamaño / 2) + (100 * Math.cos(a))), (int) ((y + tamaño / 2) + (100 * Math.sin(a))));
+        g.drawLine((int) (x + tamaño / 2), (int) (y + tamaño / 2), (int) ((x + tamaño / 2) + (50 * Math.cos(a))), (int) ((y + tamaño / 2) + (50 * Math.sin(a))));
         balas.forEach((i) -> {
             i.paintComponent(g);
         });
@@ -78,14 +78,38 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
 
         int i = (int) (Math.floor((a) / 15) % 6);
         g.drawString("" + i, 200, 200);
-        if ((a >= 90 && a < 180) || (a >= 270)) {
+        if (a<90) {//refleja la imajen con respecto al eje x invirtiendo las coordenadas en y
+            i = 6 - i;//invierte rotacion de giro
+            g.drawImage(tanque,  (int) x, (int) (y + tamaño),(int) (x + tamaño), (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);            
+            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+        } else if (a < 180) {//refleja la imajen con respecto a ambos ejes
             g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
-            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
-        } else {
-            i = 6 - i;
+            g.drawImage(tanque,  (int) (x + tamaño), (int) (y + tamaño),(int) x, (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+        } else if (a < 270) {//refleja la imajen con respecto al eje y invirtiendo las coordenadas en x
+            i = 6 - i; //invierte rotacion de giro
             g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
             g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+        } else {//deja la imagen sin reflejar
+            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         }
+        
+        /*if ((a >= 90 && a < 180) || (a >= 270)) {
+        g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+        if (a>= 270) {
+        g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+        } else {
+        g.drawImage(tanque,  (int) (x + tamaño), (int) (y + tamaño),(int) x, (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+        }
+        } else {
+        i = 6 - i;
+        g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+        if (a >= 180 && a < 270) {
+        g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+        } else {
+        g.drawImage(tanque,  (int) x, (int) (y + tamaño),(int) (x + tamaño), (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+        }
+        }*/
         a = Math.toRadians(a);
         g.drawString("vida: " + vida, 100, 100);
     }
@@ -172,8 +196,8 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
             }
         }
 
-        int x1 = (int) ((x + tamaño / 2) + (100 * Math.cos(a)));
-        int y1 = (int) ((y + tamaño / 2) + (100 * Math.sin(a)));
+        int x1 = (int) ((x + tamaño / 2) + (50 * Math.cos(a)));
+        int y1 = (int) ((y + tamaño / 2) + (50 * Math.sin(a)));
         balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this, tablero));
     }
 
