@@ -1,5 +1,6 @@
 package tanker;
 
+import Menus.Menu_basico;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,14 +23,17 @@ public class Tablero extends JPanel implements ActionListener{
     private final Timer timer;//Añadi un timer para controlar el metodo repaint desde el tablero
     public double a,dvx,dvy;
     private Image fondo;
+    private final Menu_basico menu;
     
-    
-    public Tablero() {
+    public Tablero(Menu_basico menu) {
+        
+        this.menu = menu; 
         elementos = new ArrayList();
         elementos.add(new Tanque(770,500,0,0,128,1,1000,this));
-        /*        elementos.add(new Obstaculo(300,300,200,10,this));
+        /*elementos.add(new Obstaculo(300,300,200,10,this));
         elementos.add(new Obstaculo(700,500,100,10,this));
-        elementos.add(new Obstaculo(800,100,50,10,this));*/        this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
+        elementos.add(new Obstaculo(800,100,50,10,this));*/        
+        this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
         this.addMouseListener((MouseListener) elementos.get(0));
         timer = new Timer(1,this);
         timer.start();        

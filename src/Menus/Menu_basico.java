@@ -1,56 +1,43 @@
 package Menus;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import java.util.HashMap;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import tanker.Tablero;
 
-public class Menu_basico extends JPanel{
-
-    private final GridBagConstraints limites;
+public class Menu_basico extends JFrame{
+    
+    private HashMap<String,JPanel> paneles;
 
     public Menu_basico() {
-        super(new GridBagLayout());
-        this.limites = new GridBagConstraints();
-        this.limites.gridx = 0;
-        this.limites.gridy = 0;
-        this.initNewPanel();
-    }
 
-    
-    
-    public final void initNewPanel() {
+        paneles = new HashMap();
+        
+        paneles.put("Principal", new Principal(this));
+        paneles.put("Jugar", new Jugar(this));
+        paneles.put("Opciones", new Opciones(this));
+        paneles.put("Crear", new Crear(this));
+        paneles.put("Entrar", new Entrar(this));
+        paneles.put("Tablero", new Tablero(this));
+        
+        add(paneles.get("Principal"));
+        setTitle("TANKER");
+        setSize(600, 450);
+        setLocationRelativeTo(null); //Center the frame
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
-
-    public void initButton(JButton boton, String nombre,ActionListener a) {
-        this.limites.insets = new Insets(10, 10, 10, 10);
-        boton = new JButton(nombre);        
-        this.add(boton, this.limites);
-        boton.addActionListener(a);
-        boton.setVisible(true);
-        this.limites.gridy++;
+    
+    public void Cambiar_panel(String s){
+        add(paneles.get(s));
+        paneles.get(s).setVisible(true);
         
     }
     
-    public void initLabel(JLabel label, String nombre) {
-        this.limites.insets = new Insets(20, 20, 20, 20);
-        label = new JLabel(nombre);        
-        this.add(label, this.limites);
-        label.setVisible(true);
-        this.limites.gridy++;
+    public static void main(String[] args) {
+        Menu_basico mb = new Menu_basico();
+        Principal p = new Principal(mb);
+        
     }
-    
-    public Image loadImage (String imageName) {
-        ImageIcon ii = new ImageIcon (imageName);
-        Image image = ii.getImage();
-        return image;
-    }
-
-    
+        
 }
-

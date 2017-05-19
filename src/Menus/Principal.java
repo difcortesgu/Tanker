@@ -1,78 +1,53 @@
 package Menus;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.*;
-import tanker.Main;
+import org.netbeans.lib.awtextra.*;
 
-/**
- *
- * @author Familia
- */
-public class Principal extends JFrame {
+public class Principal extends JPanel {
 
-    public Principal() {
-        /*botones:
-            opciones 
-            jugar
-        */
+    private JButton jugar,opciones;
+    private JLabel titulo;
+    private final Menu_basico menu;
+
+    public Principal(Menu_basico menu) {
+        this.initComponents();
+        this.menu=menu;
+    }
+    
+    private void initComponents() {
+
+        jugar = new JButton();
+        opciones = new JButton();
+        titulo = new JLabel();
         
-        add(new NewPanel());
-    }
+        //Permite configurar el orden de los componentes a partir de coordenadas
+        setLayout(new AbsoluteLayout());
 
-    public static void main(String[] args) {
-        Principal frame = new Principal();
-        frame.setTitle("Tanker");
-        frame.setSize(600, 450);
-        frame.setLocationRelativeTo(null); //Center the frame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
-}
-
-class NewPanel extends JPanel implements ActionListener{
-
-    //private final Timer timer;
-    private int x;
-
-    private JButton JBjugar, JBopciones, JBcrear, JBentrar;
-    private JLabel JLtanker;
-    
-    private final GridBagConstraints limites;
-
-    public NewPanel() {
-        super(new GridBagLayout());
-        this.limites = new GridBagConstraints();
-        this.limites.gridx = 0;
-        this.limites.gridy = 0;
-        this.initNewPanel();
-        //timer = new Timer(25, this);
-        //timer.start();
-    }
-
-    public final void initNewPanel() {
-        this.initLabel(this.JLtanker, "TANKER");
-        this.initButton(this.JBjugar, "Jugar");
-        this.initButton(this.JBopciones, "Opciones");
-        this.initButton(this.JBcrear, "Crear");
-        this.initButton(this.JBentrar, "Entrar");
-    }
-
-    public void initButton(JButton boton, String nombre) {
-        this.limites.insets = new Insets(10, 10, 10, 10);
-        boton = new JButton(nombre);        
-        this.add(boton, this.limites);
-        boton.addActionListener(this);
-        boton.setVisible(true);
-        this.limites.gridy++;
-    }
-    
-    public void initLabel(JLabel label, String nombre) {
-        this.limites.insets = new Insets(20, 20, 20, 20);
-        label = new JLabel(nombre);        
-        this.add(label, this.limites);
-        label.setVisible(true);
-        this.limites.gridy++;
+        //configuracion del boton jugar
+        jugar.setText("JUGAR");
+        jugar.addActionListener((java.awt.event.ActionEvent evt) -> {
+            //Accion del boton jugar
+            menu.Cambiar_panel("Jugar");
+            this.setVisible(false);
+        });
+        add(jugar, new AbsoluteConstraints(245,250,100,-1));
+        
+        //Configuracion del boton de opciones
+        opciones.setText("OPCIONES");
+        opciones.addActionListener((java.awt.event.ActionEvent evt) -> {
+            //Accion del boton opciones
+            menu.Cambiar_panel("Opciones");
+            this.setVisible(false);
+        });
+        add(opciones, new AbsoluteConstraints(235,350,120,-1));
+        
+        //configuracion del titulo
+        titulo.setFont(new java.awt.Font("Ubuntu", 0, 25)); // NOI18N
+        titulo.setText("TANKER");
+        add(titulo, new AbsoluteConstraints(250,150,100,-1));
+            
     }
     
     public Image loadImage (String imageName) {
@@ -86,11 +61,6 @@ class NewPanel extends JPanel implements ActionListener{
         super.paintComponent(g);
         Image Fondo = loadImage ("Menu.png");
         g.drawImage(Fondo, 0, 0, null);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Main m= new Main();
     }
 
 }
