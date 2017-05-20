@@ -1,15 +1,15 @@
-package Menus;
+package menus;
 
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import tanker.Tablero;
 
-public class Menu_basico extends JFrame{
+public class Ventana extends JFrame{
     
-    private HashMap<String,JPanel> paneles;
+    private final HashMap<String,JPanel> paneles;
 
-    public Menu_basico() {
+    public Ventana() {
 
         paneles = new HashMap();
         
@@ -35,9 +35,7 @@ public class Menu_basico extends JFrame{
     }
     
     public static void main(String[] args) {
-        Menu_basico mb = new Menu_basico();
-        Principal p = new Principal(mb);
-        
+        Ventana mb = new Ventana();
     }
         
 }
