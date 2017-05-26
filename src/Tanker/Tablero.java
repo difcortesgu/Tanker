@@ -1,6 +1,6 @@
-package Servidor;
+package Tanker;
 
-import Usuario.Ventana;
+import Menus.Ventana;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
@@ -25,10 +26,12 @@ public class Tablero extends JPanel implements ActionListener{
     private Image fondo;
     private final Ventana menu;
     private final JButton atras;
+    private boolean controles;//True = mouse / False = teclado 
     
     public Tablero(Ventana menu) {
         
         this.menu = menu; 
+        controles=true;
         atras = new JButton();
         atras.setText("atras");
         atras.addActionListener((ActionEvent evt) -> {
@@ -38,9 +41,13 @@ public class Tablero extends JPanel implements ActionListener{
         add(atras, new AbsoluteConstraints(10, 10, -1, -1));
         
         elementos = new ArrayList();
-        elementos.add(new Tanque(770,500,0,0,100,1,1000,this));
-
-        this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
+        elementos.add(new Tanque(770,500,820,550,100,1,1000,this));
+        if(controles){
+            this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
+        }else{
+            this.addKeyListener((KeyListener)elementos.get(0));
+            this.setFocusable(true);
+        }
         this.addMouseListener((MouseListener) elementos.get(0));
         timer = new Timer(1,this);
         timer.start();               

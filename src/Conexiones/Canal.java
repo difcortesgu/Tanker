@@ -1,4 +1,4 @@
-package Servidor;
+package Conexiones;
 
 import java.io.IOException;
 import java.io.InputStream;

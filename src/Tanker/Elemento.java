@@ -1,4 +1,4 @@
-package Servidor;
+package Tanker;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;

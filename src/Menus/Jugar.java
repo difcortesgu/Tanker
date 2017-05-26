@@ -1,4 +1,4 @@
-package Usuario;
+package Menus;
 
 public class Jugar extends javax.swing.JPanel {
 

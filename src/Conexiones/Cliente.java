@@ -1,5 +1,6 @@
-package Usuario;
+package Conexiones;
 
+import Tanker.Tablero;
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -7,11 +8,13 @@ import java.util.Scanner;
 public class Cliente implements Runnable{
     
     private Socket cliente;
+    private Tablero tablero;
     private int x,y;
     private String ip;
     
-    public Cliente (String ip) {
+    public Cliente (String ip,Tablero tablero) {
         this.ip=ip;
+        this.tablero=tablero;
         Thread t= new Thread(this, "client");
         t.start();
     }
@@ -59,7 +62,7 @@ public class Cliente implements Runnable{
             
             System.out.println("entrada de datos");
             String mensajeLeido="";
-            String mensajeUsuario = "mensaje";
+            String mensajeUsuario = ""+tablero.getElementos().size();
             
           
             while(true){               

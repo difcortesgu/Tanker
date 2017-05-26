@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Usuario;
+package Menus;
+
+import Conexiones.Cliente;
+import Tanker.Tablero;
 
 /**
  *
@@ -114,7 +117,7 @@ public class Entrar extends javax.swing.JPanel {
     }//GEN-LAST:event_partidasPropertyChange
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        Cliente c = new Cliente("good");
+        Cliente c = new Cliente("10.203.150.166",((Tablero)((Ventana)jFrame1).getPanel("Tablero")));
     }//GEN-LAST:event_entrarActionPerformed
 
 

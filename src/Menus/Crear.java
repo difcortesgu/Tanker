@@ -1,7 +1,7 @@
-package Usuario;
+package Menus;
 
-import Servidor.Canal;
-import Servidor.Servidor;
+import Conexiones.Canal;
+import Conexiones.Servidor;
 
 public class Crear extends javax.swing.JPanel {
 

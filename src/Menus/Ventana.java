@@ -1,9 +1,9 @@
-package Usuario;
+package Menus;
 
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import Servidor.Tablero;
+import Tanker.Tablero;
 
 public class Ventana extends JFrame{
     

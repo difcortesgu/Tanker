@@ -1,4 +1,4 @@
-package Servidor;
+package Tanker;
 
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;

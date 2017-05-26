@@ -1,8 +1,10 @@
-package Servidor;
+package Tanker;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -10,13 +12,14 @@ import static java.lang.Math.PI;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-public class Tanque extends Elemento implements MouseMotionListener, MouseListener , Runnable{
+public class Tanque extends Elemento implements MouseMotionListener, MouseListener,KeyListener , Runnable{
 
-    double dx, dy, mx, my, daño;
+    private double dx,dy,mx,my;
+    private final double daño;
     private ArrayList<Bala> balas;
     private Image tanque;
     private int contador = 0;
-    private int TipoOruga; //para seleccionar qué tipo de oruga tendrá
+    private final int TipoOruga; //para seleccionar qué tipo de oruga tendrá
     private final int TipoArmazon = 11;//por ahora es final porque no hay más jejeje
 
     public Tanque(double x, double y, double vx, double vy, double tamaño, int tipo, double vida, Tablero tablero) {
@@ -48,6 +51,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         balas.forEach((i) -> {
             i.paintComponent(g);
         });
+        g.fillOval((int)mx, (int)my, 2, 2);
         g.drawString(""+balas.size(), 10, 10);
     }
 
@@ -172,5 +176,29 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     @Override
     public void run() {
         timer.start();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode()== KeyEvent.VK_UP){
+            my-=60;
+        }
+        if(e.getKeyCode()== KeyEvent.VK_DOWN){
+            my+=60;
+        }
+        if(e.getKeyCode()== KeyEvent.VK_RIGHT){
+            mx+=60;
+        }
+        if(e.getKeyCode()== KeyEvent.VK_LEFT){
+            mx-=60;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }
