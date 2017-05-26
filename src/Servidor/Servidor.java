@@ -1,74 +1,90 @@
-package Servidor;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ServidorPack;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Servidor implements Runnable{
+/**
+ *
+ * @author fabian.giraldo
+ */
+public class Servidor {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        
         try {
-            
-            int x=0,y=0;
-             
+           
             //1:ServerSocket
             ServerSocket serverSocket = new ServerSocket(8000);
             //2.Escuchando conexion de un cliente
             System.out.println("Servidor esperando conexiones");
-            Socket cliente = serverSocket.accept();
-            System.out.println("Se ha conectado un cliente");
-            //3.Abriendo flujos
-            InputStream flujoEntrada = cliente.getInputStream();
-            OutputStream flujoSalida = cliente.getOutputStream();
-            //4. Poniendo decoradores para leer informacion textual
-            BufferedReader lectura = new BufferedReader(new InputStreamReader(flujoEntrada));
-            PrintWriter escritura = new PrintWriter(flujoSalida,true);
-            String mensajeLeido="";
-           
-            //Scanner sc= new Scanner(flujoEntrada," ");
-            while(true){
-                if(!Usuario.Main.isCerrado()){
-                    mensajeLeido = lectura.readLine();
-                    System.out.println(mensajeLeido+" END");
-                    cliente.shutdownInput();
-                    cliente.shutdownOutput();
-                    
-                    break;
-                }else{
-                    //5. Recibo la informacion
-                    mensajeLeido = lectura.readLine();
-                    //6. Mensaje Respuesta (Realizacion ECO)
-                    System.out.println(mensajeLeido);
-                
-                    //x=sc.nextInt(); 
-                    //y=sc.nextInt();
-                    //System.out.println(x);
-                    escritura.println("ECO " + mensajeLeido);
-                }
+            int numero=2;
+            Cliente cliente [] = new Cliente [numero];
+            Socket socket[]= new Socket [numero];
+            for (int i = 0; i < numero; i++) {
+                socket[i]= serverSocket.accept();
+                System.out.println("Se ha conectado cliente "+(i+1));
+                cliente[i]= new Cliente();
+                cliente[i].inicializar(socket[i]);
                 
                 
-              
-              
             }
             
+            /*Socket jugador []= new Socket[numero];
+            OutputStream flujoSalida[]= new OutputStream [numero];
+            InputStream flujoEntrada[]= new InputStream[numero];
+            Scanner sc[]= new Scanner[numero];
+            PrintWriter escritura[] = new PrintWriter[numero];
+            
+            
+            for (int i = 0; i < numero; i++) {
+            jugador [i]= serverSocket.accept();
+            System.out.println("Se ha conectado cliente "+(i+1));
+            flujoEntrada[i]=jugador[i].getInputStream();
+            flujoSalida[i]= jugador[i].getOutputStream();
+            sc[i]= new Scanner(flujoEntrada[i]);
+            escritura[i]= new PrintWriter(flujoSalida[i],true);
+            }
+            
+            */
+            String mensajeLeido="";
+           
+            
+            
+            while(true){
+               
+                for (int i = 0; i < numero; i++) {
+                    
+                    mensajeLeido= cliente[i].escribirMensaje(cliente[i].getSc());
+                    cliente[i].getEscritura().println(mensajeLeido);
+                    System.out.print(mensajeLeido+"\t");
+                }
+                System.out.println("");
+                /*mensajeLeido="";
+                
+                mensajeLeido=sc[0].nextLine();
+                //mensajeLeido+=" "+sc[1].nextLine();
+                
+                System.out.println(mensajeLeido);
+                for (int i = 0; i < numero; i++) {
+                escritura[i].println(i+" "+mensajeLeido);
+                }
+                }*/
+            }
             
         } catch (IOException ex) {
-        System.out.println("coneccion perdida.  END");  
-        System.exit(0);
+           
+            System.out.println("coneccion perdida.  END");
+            System.exit(0);
         }
-        
-        
-    }
-
-    @Override
-    public void run() {
-
-        
         
     }
     

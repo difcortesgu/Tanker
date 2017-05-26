@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Usuario;
-import Servidor.Tablero;
+
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -19,28 +19,33 @@ import javax.swing.Timer;
  *
  * @author juan sebastian
  */
-public class CPanel extends JPanel implements MouseMotionListener, MouseListener, ActionListener{
-    int x,y;
-    int DELAY=1000/32;
-    boolean click;
+public class CPanel extends JPanel implements MouseMotionListener, MouseListener{
+    int x,y,x2,y2;
+    int DELAY=1;
+    int click;
     final int p1=100,p2=200;
+   
     //Tablero tablero;
 
     public CPanel() {
         //this.tablero= tablero;
         x=0;
         y=0;
-        click=false;
-        Timer time= new Timer(DELAY,this);
-        time.start();
+        click=0;
+       
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
+        
         
     }
     
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawString(this.toString(),p1,p2);
+        g.fillRect(x, y, 10, 10);
+        
+        
+       
         //tablero.paintComponent(g);
         
     }
@@ -51,12 +56,12 @@ public class CPanel extends JPanel implements MouseMotionListener, MouseListener
         //return "parametros:  x="+x+",  y="+y+",  click="+click;
     }
     
+   
 
-  
-    
-
+ 
     @Override
     public void mouseDragged(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -73,12 +78,12 @@ public class CPanel extends JPanel implements MouseMotionListener, MouseListener
 
     @Override
     public void mousePressed(MouseEvent e) {
-        click=true;
+        click=1;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        click=false;
+        click=0;
     }
 
     @Override
@@ -91,15 +96,46 @@ public class CPanel extends JPanel implements MouseMotionListener, MouseListener
        
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        this.repaint();
-   
+     public int getX() {
+        return x;
     }
 
-    
+    public void setX(int x) {
+        this.x = x;
+    }
 
-   
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getX2() {
+        return x2;
+    }
+
+    public void setX2(int x2) {
+        this.x2 = x2;
+    }
+
+    public int getY2() {
+        return y2;
+    }
+
+    public void setY2(int y2) {
+        this.y2 = y2;
+    }
+
+    public int getClick() {
+        return click;
+    }
+
+    public void setClick(int click) {
+        this.click = click;
+    }
+    
 
     public int getDELAY() {
         return DELAY;
@@ -109,13 +145,6 @@ public class CPanel extends JPanel implements MouseMotionListener, MouseListener
         this.DELAY = DELAY;
     }
 
-    public boolean isClick() {
-        return click;
-    }
-
-    public void setClick(boolean click) {
-        this.click = click;
-    }
-    
+   
     
 }
