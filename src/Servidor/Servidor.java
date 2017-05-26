@@ -5,6 +5,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Servidor implements Runnable{
+
+    public Servidor() {
+        Thread t= new Thread(this, "server");
+        t.start();
+    }
+    
+    
     
     @Override
     public void run() {

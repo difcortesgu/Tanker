@@ -97,6 +97,11 @@ public class Entrar extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 560, 210));
 
         entrar.setText("Entrar");
+        entrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrarActionPerformed(evt);
+            }
+        });
         add(entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -107,6 +112,10 @@ public class Entrar extends javax.swing.JPanel {
 
     private void partidasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_partidasPropertyChange
     }//GEN-LAST:event_partidasPropertyChange
+
+    private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
+        Cliente c = new Cliente();
+    }//GEN-LAST:event_entrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

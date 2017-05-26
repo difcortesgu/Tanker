@@ -10,7 +10,8 @@ public class Cliente implements Runnable{
     private int x,y;
     
     public Cliente () {
-               
+        Thread t= new Thread(this, "client");
+        t.start();
     }
 
     public Socket getCliente() {

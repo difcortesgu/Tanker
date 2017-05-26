@@ -81,8 +81,6 @@ public class Crear extends javax.swing.JPanel {
         ((Ventana)jFrame1).Cambiar_panel("Tablero");
         this.setVisible(false);
         Servidor s = new Servidor();
-        Cliente c = new Cliente();
-        Cliente c1 = new Cliente();
     }//GEN-LAST:event_crearActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
