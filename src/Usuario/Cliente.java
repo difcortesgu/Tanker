@@ -8,8 +8,10 @@ public class Cliente implements Runnable{
     
     private Socket cliente;
     private int x,y;
+    private String ip;
     
-    public Cliente () {
+    public Cliente (String ip) {
+        this.ip=ip;
         Thread t= new Thread(this, "client");
         t.start();
     }
@@ -44,7 +46,7 @@ public class Cliente implements Runnable{
          try {
             
              
-            cliente = new Socket("localhost",8000);
+            cliente = new Socket(ip,8000);
             
             //3.Abriendo flujos
             InputStream flujoEntrada = cliente.getInputStream();

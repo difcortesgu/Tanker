@@ -114,7 +114,7 @@ public class Entrar extends javax.swing.JPanel {
     }//GEN-LAST:event_partidasPropertyChange
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        Cliente c = new Cliente();
+        Cliente c = new Cliente("good");
     }//GEN-LAST:event_entrarActionPerformed
 
 
