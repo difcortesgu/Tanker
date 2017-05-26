@@ -2,7 +2,6 @@ package tanker;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,7 +10,7 @@ import static java.lang.Math.PI;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-public class Tanque extends Elemento implements MouseMotionListener, MouseListener {
+public class Tanque extends Elemento implements MouseMotionListener, MouseListener , Runnable{
 
     double dx, dy, mx, my, daño;
     private ArrayList<Bala> balas;
@@ -25,6 +24,8 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         daño = 50;
         balas = new ArrayList();
         this.TipoOruga = tipo;
+        Thread t = new Thread(this, "tank");
+        t.start();
     }
 
     @Override
@@ -218,5 +219,10 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         Image image = ii.getImage();
 
         return image;
+    }
+
+    @Override
+    public void run() {
+        timer.start();
     }
 }

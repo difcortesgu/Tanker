@@ -16,7 +16,7 @@ public class Main extends JFrame{
     static Socket cliente;
     int x,y;
     boolean click;
-    static boolean cerrado;
+    static boolean cerrado=false;
     static CPanel C= new CPanel();
 
     public Main() {
@@ -41,7 +41,7 @@ public class Main extends JFrame{
          try {
             Main usuario= new Main();
            
-             cliente = new Socket("localhost",8000);
+             cliente = new Socket("10.203.150.166",8000);
             //3.Abriendo flujos
             InputStream flujoEntrada = cliente.getInputStream();
             OutputStream flujoSalida = cliente.getOutputStream();

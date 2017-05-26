@@ -106,7 +106,6 @@ public class Entrar extends javax.swing.JPanel {
     }//GEN-LAST:event_atrasActionPerformed
 
     private void partidasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_partidasPropertyChange
-        partidas.getValueAt(partidas.getSelectedRow(), 2);
     }//GEN-LAST:event_partidasPropertyChange
 
 

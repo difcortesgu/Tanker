@@ -15,6 +15,7 @@ public class Bala extends Elemento{
         this.tanque=tanque;
         a=tablero.a;
         timer.setDelay(5);
+        timer.start();
     }
 
     public double getDaño() {

@@ -12,8 +12,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import static java.lang.Math.PI;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
@@ -34,9 +32,9 @@ public class Tablero extends JPanel implements ActionListener{
         this.menu = menu; 
         atras = new JButton();
         atras.setText("atras");
-        atras.addActionListener(new java.awt.event.ActionListener() {
+        atras.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 menu.Cambiar_panel("Jugar");
                 setVisible(false);
             }
@@ -44,7 +42,8 @@ public class Tablero extends JPanel implements ActionListener{
         add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
         
         elementos = new ArrayList();
-        elementos.add(new Tanque(770,500,0,0,128,1,1000,this));
+        elementos.add(new Tanque(770,500,0,0,50,1,1000,this));
+        elementos.add(new Tanque(100,100,0,0,50,1,1000,this));
         /*elementos.add(new Obstaculo(300,300,200,10,this));
         elementos.add(new Obstaculo(700,500,100,10,this));
         elementos.add(new Obstaculo(800,100,50,10,this));*/        

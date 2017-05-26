@@ -45,7 +45,7 @@ public class Servidor {
            
             //Scanner sc= new Scanner(flujoEntrada," ");
             while(true){
-                if(Usuario.Main.isCerrado()){
+                if(!Usuario.Main.isCerrado()){
                     mensajeLeido = lectura.readLine();
                     System.out.println(mensajeLeido+" END");
                     cliente.shutdownInput();

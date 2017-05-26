@@ -10,6 +10,7 @@ public class Obstaculo extends Elemento{
         super(x, y, tamaño, vida, tablero);
         vx=0;
         vy=0;
+        timer.start();
         
     }
 
