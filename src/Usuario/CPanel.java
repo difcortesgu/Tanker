@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Usuario;
-import tanker.Tablero;
+import Servidor.Tablero;
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;

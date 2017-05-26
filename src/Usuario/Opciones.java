@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package menus;
+package Usuario;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import Servidor.Tablero;
 
 /**
  *
@@ -103,6 +104,7 @@ public class Opciones extends javax.swing.JPanel {
     private void tecladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tecladoActionPerformed
         mouse.setSelected(false);
         teclado.setSelected(true);
+        
     }//GEN-LAST:event_tecladoActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed

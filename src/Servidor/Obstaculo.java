@@ -1,21 +1,18 @@
-package tanker;
+package Servidor;
 
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 
 public class Obstaculo extends Elemento{
+ 
     int c=0;
     
     public Obstaculo(double x, double y, double tamaño, double vida, Tablero tablero) {
         super(x, y, tamaño, vida, tablero);
         vx=0;
-        vy=0;
-        timer.start();
-        
+        vy=0;        
     }
 
-    //cambie los 2 ciclos porque con los anteriores no estaba eliminando el objeto
-    //y elimine el metodo Colision2 porque se podia simplemente colocar en el actionPerformed
     @Override
     public void actionPerformed(ActionEvent e) {
     
@@ -43,8 +40,7 @@ public class Obstaculo extends Elemento{
             vy= 5*(Math.random()-Math.random());
             c=0;
         }
-        
-        
+         
         x+=vx;
         y+=vy;
         c++;

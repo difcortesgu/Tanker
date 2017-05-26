@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servidor;
-import Usuario.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,15 +8,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author fabian.giraldo
- */
-public class Servidor {
+public class Servidor implements Runnable{
     
     public static void main(String[] args) {
         try {
@@ -74,6 +61,13 @@ public class Servidor {
         System.out.println("coneccion perdida.  END");  
         System.exit(0);
         }
+        
+        
+    }
+
+    @Override
+    public void run() {
+
         
         
     }

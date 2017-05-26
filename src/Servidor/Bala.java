@@ -1,20 +1,23 @@
-package tanker;
+package Servidor;
 
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
+import static java.lang.Math.PI;
 
 public class Bala extends Elemento{
 
     
-    private double daño;
+    private double daño,dvx,dvy;
     private Tanque tanque;
     
     public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida,Tanque tanque, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
         this.daño = daño;
         this.tanque=tanque;
-        a=tablero.a;
         timer.setDelay(5);
+        a=(Math.random()-Math.random())%2*PI;
+        dvx=Math.cos(a);
+        dvy=Math.sin(a);
         timer.start();
     }
 
@@ -34,7 +37,6 @@ public class Bala extends Elemento{
         this.tanque = tanque;
     }
     
-    
     @Override
     public boolean colision(){
         return x<0 || x>tablero.getWidth() || y<0 || y>tablero.getHeight();
@@ -46,13 +48,9 @@ public class Bala extends Elemento{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        tablero.dvx=Math.cos(a);
-        tablero.dvy=Math.sin(a);
-       
-        vx+=tablero.dvx/500;
-        vy+=tablero.dvy/500;
-        
+              
+        vx+=dvx/500;
+        vy+=dvy/500;
         x+=vx;
         y+=vy;
     }

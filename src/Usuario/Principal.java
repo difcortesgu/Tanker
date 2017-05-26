@@ -1,4 +1,4 @@
-package menus;
+package Usuario;
 
 import java.awt.Graphics;
 import java.awt.Image;

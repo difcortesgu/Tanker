@@ -1,4 +1,4 @@
-package menus;
+package Usuario;
 
 public class Crear extends javax.swing.JPanel {
 
@@ -76,7 +76,8 @@ public class Crear extends javax.swing.JPanel {
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
         ((Ventana)jFrame1).Cambiar_panel("Tablero");
-        this.setVisible(false);        
+        this.setVisible(false);
+        
     }//GEN-LAST:event_crearActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed

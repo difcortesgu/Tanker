@@ -1,4 +1,4 @@
-package tanker;
+package Servidor;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
@@ -108,7 +108,6 @@ public abstract class Elemento implements ActionListener{
         return vida<=0;
     }
     
-    //Cambie el metodo borrar por Finalize y capture la excepcion dentro del mismo metodo
     @Override
     public void finalize(){
         timer.stop();

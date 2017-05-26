@@ -1,9 +1,9 @@
-package menus;
+package Usuario;
 
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import tanker.Tablero;
+import Servidor.Tablero;
 
 public class Ventana extends JFrame{
     
@@ -12,21 +12,27 @@ public class Ventana extends JFrame{
     public Ventana() {
 
         paneles = new HashMap();
-        
         paneles.put("Principal", new Principal(this));
         paneles.put("Jugar", new Jugar(this));
         paneles.put("Opciones", new Opciones(this));
         paneles.put("Crear", new Crear(this));
         paneles.put("Entrar", new Entrar(this));
-        paneles.put("Tablero", new Tablero(this));
+        paneles.put("Tablero",new Tablero(this));
         
         add(paneles.get("Principal"));
         setTitle("TANKER");
         setSize(600, 450);
         setLocationRelativeTo(null); //Center the frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
     }
+
+    public JPanel getPanel(String s) {
+        return paneles.get(s);
+    }
+    
+    
     
     public void Cambiar_panel(String s){
         add(paneles.get(s));

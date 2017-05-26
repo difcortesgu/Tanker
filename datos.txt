@@ -1,42 +1,10 @@
-Estos son los datos que hay que enviar por sockets
+numero tanques
 
+POR CADA TANQUE
+posicion x,y
+numero balas
+posicion cada bala x,y
 
-Datos que solo se envian una vez:
-
-Tablero
-fondo               string
-viento              boolean
-
-Tanque
-tipo de oruga       int 
-tipo de armazon     int
-daño                int
-
-Obstaculos          
-x                   double
-y                   double
-
-
-
-Datos que hay que enviar constantemente:
-
-Tanques
-vida                int
-mouse x             double 
-mouse y             double
-x                   double
-y                   double
-        
-Balas
-x                   double
-y                   double
-velocidad x         double
-velocidad y         double
-a
-
-
-//este solo se envia si hay cambios en la vida
-Obstaculos          
-vida                double
-
-    
+numero de obstaculos
+POR CADA OBSTACULO
+posicion x,y

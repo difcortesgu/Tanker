@@ -1,12 +1,8 @@
 package Usuario;
-import Servidor.*;
-import tanker.*;
 
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,10 +37,12 @@ public class Main extends JFrame{
          try {
             Main usuario= new Main();
            
-             cliente = new Socket("10.203.150.166",8000);
+            cliente = new Socket("10.203.150.166",8000);
+
             //3.Abriendo flujos
             InputStream flujoEntrada = cliente.getInputStream();
             OutputStream flujoSalida = cliente.getOutputStream();
+
             //4. Poniendo decoradores para leer informacion textual
             BufferedReader lectura = new BufferedReader(new InputStreamReader(flujoEntrada));
             PrintWriter escritura = new PrintWriter(flujoSalida,true);
