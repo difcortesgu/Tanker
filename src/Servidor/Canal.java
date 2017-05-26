@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ServidorPack;
+package Servidor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,11 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-/**
- *
- * @author juan sebastian
- */
-public class Cliente  {
+public class Canal{
     
     OutputStream flujoSalida;
     InputStream flujoEntrada;
@@ -25,7 +16,7 @@ public class Cliente  {
     String mensaje;
     Socket socket;
 
-    public Cliente() {
+    public Canal() {
         
     }
     public void inicializar(Socket socket) throws IOException{
@@ -81,10 +72,5 @@ public class Cliente  {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
-    
-    
 
-    
-    
 }

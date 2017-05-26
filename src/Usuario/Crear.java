@@ -1,5 +1,8 @@
 package Usuario;
 
+import Servidor.Canal;
+import Servidor.Servidor;
+
 public class Crear extends javax.swing.JPanel {
 
     public Crear(Ventana m) {
@@ -77,7 +80,9 @@ public class Crear extends javax.swing.JPanel {
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
         ((Ventana)jFrame1).Cambiar_panel("Tablero");
         this.setVisible(false);
-        
+        Servidor s = new Servidor();
+        Cliente c = new Cliente();
+        Cliente c1 = new Cliente();
     }//GEN-LAST:event_crearActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
