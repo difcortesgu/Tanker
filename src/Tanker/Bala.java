@@ -7,17 +7,25 @@ import static java.lang.Math.PI;
 public class Bala extends Elemento{
 
     
-    private double daño,dvx,dvy;
-    private Tanque tanque;
+    private final double daño,dvx,dvy;
+    private final Tanque tanque;
+    private final boolean viento;
     
-    public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida,Tanque tanque, Tablero tablero) {
+    public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida,Tanque tanque,boolean viento, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
+        this.viento=viento;
         this.daño = daño;
         this.tanque=tanque;
         timer.setDelay(5);
-        a=(Math.random()-Math.random())%2*PI;
-        dvx=Math.cos(a);
-        dvy=Math.sin(a);
+        if(this.viento){
+            a=(Math.random()-Math.random())%2*PI;
+            dvx=Math.cos(a);
+            dvy=Math.sin(a);
+        }else{
+            dvx=0;
+            dvy=0;
+        }
+             
         timer.start();
     }
 
@@ -25,16 +33,8 @@ public class Bala extends Elemento{
         return daño;
     }
 
-    public void setDaño(double daño) {
-        this.daño = daño;
-    }
-
     public Tanque getTanque() {
         return tanque;
-    }
-
-    public void setTanque(Tanque tanque) {
-        this.tanque = tanque;
     }
     
     @Override

@@ -2,6 +2,9 @@ package Menus;
 
 import Conexiones.Canal;
 import Conexiones.Servidor;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class Crear extends javax.swing.JPanel {
 
@@ -98,6 +101,20 @@ public class Crear extends javax.swing.JPanel {
         teams.setSelected(true);
     }//GEN-LAST:event_teamsActionPerformed
 
+            @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image Fondo = loadImage ("fondo1.jpg");
+        g.drawImage(Fondo, 0, 0, null);
+    }
+
+    public Image loadImage (String imageName) {
+        ImageIcon ii = new ImageIcon (imageName);
+        Image image = ii.getImage();
+        return image;
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;

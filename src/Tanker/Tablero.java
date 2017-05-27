@@ -27,6 +27,7 @@ public class Tablero extends JPanel implements ActionListener{
     private final Ventana menu;
     private final JButton atras;
     private boolean controles;//True = mouse / False = teclado 
+    private boolean viento;
     
     public Tablero(Ventana menu) {
         
@@ -41,7 +42,7 @@ public class Tablero extends JPanel implements ActionListener{
         add(atras, new AbsoluteConstraints(10, 10, -1, -1));
         
         elementos = new ArrayList();
-        elementos.add(new Tanque(770,500,820,550,100,1,1000,this));
+        elementos.add(new Tanque(770,500,820,550,100,1,1000,viento,this));
         if(controles){
             this.addMouseMotionListener((MouseMotionListener) elementos.get(0));
         }else{

@@ -65,7 +65,7 @@ public class Principal extends javax.swing.JPanel {
         this.setVisible(false);
     }//GEN-LAST:event_opcionesActionPerformed
 
-        public Image loadImage (String imageName) {
+    public Image loadImage (String imageName) {
         ImageIcon ii = new ImageIcon (imageName);
         Image image = ii.getImage();
         return image;
