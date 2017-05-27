@@ -1,9 +1,11 @@
 package Conexiones;
 
+import Menus.Ventana;
 import Tanker.Tablero;
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+import javax.swing.JPanel;
 
 public class Cliente implements Runnable{
     
@@ -11,10 +13,13 @@ public class Cliente implements Runnable{
     private Tablero tablero;
     private int x,y;
     private String ip;
+    private Ventana ventana;
+    private JPanel panel;
     
-    public Cliente (String ip,Tablero tablero) {
+    public Cliente (String ip,Ventana ventana, JPanel panel) {
         this.ip=ip;
-        this.tablero=tablero;
+        this.ventana=ventana;
+        this.panel= panel;
         Thread t= new Thread(this, "client");
         t.start();
     }
@@ -62,8 +67,12 @@ public class Cliente implements Runnable{
             
             System.out.println("entrada de datos");
             String mensajeLeido="";
-            String mensajeUsuario = ""+tablero.getElementos().size();
-            
+            String mensajeUsuario = "mensaje usuario";
+            //inicializacion
+            escritura.println(mensajeUsuario);
+            mensajeLeido= sc.nextLine();
+            ventana.Cambiar_panel("Tablero");
+            panel.setVisible(false);
           
             while(true){               
                escritura.println(mensajeUsuario);

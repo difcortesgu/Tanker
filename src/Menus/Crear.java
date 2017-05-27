@@ -1,7 +1,6 @@
 package Menus;
 
-import Conexiones.Canal;
-import Conexiones.Servidor;
+import Conexiones.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -81,9 +80,8 @@ public class Crear extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Tablero");
-        this.setVisible(false);
         Servidor s = new Servidor();
+        Cliente c= new Cliente("localhost",(Ventana)jFrame1,this);
     }//GEN-LAST:event_crearActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
