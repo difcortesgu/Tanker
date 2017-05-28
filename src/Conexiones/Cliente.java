@@ -12,12 +12,14 @@ public class Cliente implements Runnable{
     
     private Socket cliente;
     private int n_tanques,n_balas,n_obstaculos;
-    private int x,y,angulo,click;
+    private int x,y,angulo;
     private String ip;
     private Ventana ventana;
     private JPanel panel;
     private Tablero tablero;
     private DibujitosTablero cpanel;
+    private int tipoOruga,tipoArmazon;
+    private boolean click;
     
     public Cliente (String ip,Ventana ventana, JPanel panel) {
         this.ip=ip;
@@ -73,9 +75,11 @@ public class Cliente implements Runnable{
             escritura.println(mensajeUsuario);
             mensajeLeido= sc.nextLine();
             
-            ventana.Cambiar_panel("Tablero");
-            panel.setVisible(false);
             
+            cpanel=new DibujitosTablero(x,y,angulo,tipoOruga,tipoArmazon,click);
+            ventana.getPaneles().put("Dibujios", cpanel);
+            ventana.Cambiar_panel("Tsblero");
+            panel.setVisible(false);
             
             int contador =0;
             while(true){               
@@ -116,7 +120,8 @@ public class Cliente implements Runnable{
     
     public String inicializar(Scanner sc){
         String datos_in;
-        int tipoOruga=1,tipoArmazon=11;
+        tipoOruga=1;
+        tipoArmazon=11;
          
         datos_in=tipoOruga+" "+tipoArmazon;
         return datos_in;

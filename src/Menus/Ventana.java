@@ -40,6 +40,11 @@ public class Ventana extends JFrame{
         add(paneles.get(s));
         paneles.get(s).setVisible(true);    
     }
+
+    public HashMap<String, JPanel> getPaneles() {
+        return paneles;
+    }
+    
     
     public static void main(String[] args) {
         Ventana mb = new Ventana();
@@ -50,6 +55,7 @@ public class Ventana extends JFrame{
         Image image = ii.getImage();
         return image;
     }
+    
 
         
 }

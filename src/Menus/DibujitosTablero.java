@@ -28,6 +28,7 @@ public class DibujitosTablero extends JPanel implements MouseMotionListener, Mou
     private boolean click;
     private Image tanque;
     private int contador=0;
+    private Ventana ventana;
 
     public DibujitosTablero(int x, int y, double a, int TipoOruga, int TipoArmazon, boolean click) {
         this.x = x;
