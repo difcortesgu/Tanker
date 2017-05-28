@@ -78,7 +78,7 @@ public class Cliente implements Runnable{
             
             cpanel=new DibujitosTablero(x,y,angulo,tipoOruga,tipoArmazon,click);
             ventana.getPaneles().put("Dibujios", cpanel);
-            ventana.Cambiar_panel("Tsblero");
+            ventana.Cambiar_panel("Tablero");
             panel.setVisible(false);
             
             int contador =0;
