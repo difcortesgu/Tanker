@@ -1,5 +1,6 @@
 package Conexiones;
 
+import Menus.DibujitosTablero;
 import Menus.Ventana;
 import Tanker.Tablero;
 import java.io.*;
@@ -10,11 +11,13 @@ import javax.swing.JPanel;
 public class Cliente implements Runnable{
     
     private Socket cliente;
-    private Tablero tablero;
-    private int x,y;
+    private int n_tanques,n_balas,n_obstaculos;
+    private int x,y,angulo,click;
     private String ip;
     private Ventana ventana;
     private JPanel panel;
+    private Tablero tablero;
+    private DibujitosTablero cpanel;
     
     public Cliente (String ip,Ventana ventana, JPanel panel) {
         this.ip=ip;
@@ -22,6 +25,7 @@ public class Cliente implements Runnable{
         this.panel= panel;
         Thread t= new Thread(this, "client");
         t.start();
+        tablero= (Tablero) ventana.getPanel("Tablero");
     }
 
     public Socket getCliente() {
@@ -61,23 +65,27 @@ public class Cliente implements Runnable{
             OutputStream flujoSalida = cliente.getOutputStream();
                        
             PrintWriter escritura = new PrintWriter(flujoSalida,true);
-            
-            //5.Solicitando datos al usuario
             Scanner sc= new Scanner(flujoEntrada);
-            
             System.out.println("entrada de datos");
+            
             String mensajeLeido="";
-            String mensajeUsuario = "mensaje usuario";
-            //inicializacion
+            String mensajeUsuario = this.inicializar(sc);
             escritura.println(mensajeUsuario);
             mensajeLeido= sc.nextLine();
+            
             ventana.Cambiar_panel("Tablero");
             panel.setVisible(false);
-          
+            
+            
+            int contador =0;
             while(true){               
                escritura.println(mensajeUsuario);
                mensajeLeido= sc.nextLine();
-               System.out.println(mensajeLeido);
+               if(contador>1000){
+                   System.out.println("cliente: "+mensajeLeido);
+                   contador=0;
+               }
+               contador++;
             }
 
         } catch (IOException ex) {
@@ -85,8 +93,32 @@ public class Cliente implements Runnable{
             
         }
         
+    } 
+    
+    public void datos(Scanner sc){
+        n_tanques=sc.nextInt();
+        for (int i = 0; i < n_tanques; i++) {
+            x=sc.nextInt();
+            y=sc.nextInt();
+            angulo=sc.nextInt();
+            n_balas=sc.nextInt();
+            for (int j = 0; j < 10; j++) {
+                x=sc.nextInt();
+                y=sc.nextInt();
+            }
+        }
+        n_obstaculos=sc.nextInt();
+        for (int i = 0; i < n_obstaculos; i++) {
+            x=sc.nextInt();
+            y=sc.nextInt();
+        }   
     }
     
-    
-       
+    public String inicializar(Scanner sc){
+        String datos_in;
+        int tipoOruga=1,tipoArmazon=11;
+         
+        datos_in=tipoOruga+" "+tipoArmazon;
+        return datos_in;
+     }   
 }

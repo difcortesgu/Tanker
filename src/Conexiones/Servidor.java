@@ -32,14 +32,25 @@ public class Servidor implements Runnable{
                 cliente[i].inicializar(socket[i]);                
             }
             
-        String mensajeLeido="";   
+        String mensajeEntrante="";   
+        String mensajeSaliente;
+        int contador=0;
         while(true){
+            mensajeSaliente="";
             for (int i = 0; i < numero; i++) {                    
-                mensajeLeido= cliente[i].escribirMensaje(cliente[i].getSc());
-                cliente[i].getEscritura().println(mensajeLeido);
-                System.out.print(mensajeLeido+"\t");
+                mensajeEntrante= cliente[i].escribirMensaje(cliente[i].getSc());  
+                mensajeSaliente+=mensajeEntrante+" ";
             }
-            System.out.println("");
+             for (int i = 0; i < numero; i++) {                    
+               
+                cliente[i].getEscritura().println((i+1)+" "+mensajeSaliente);
+                
+            }
+             if(contador>1000){
+            System.out.println("servidor:  "+mensajeSaliente);
+            contador=0;
+             }
+             contador++;
         }
             
         } catch (IOException ex) {
@@ -49,5 +60,5 @@ public class Servidor implements Runnable{
         }
 
     }
-    
+     
 }

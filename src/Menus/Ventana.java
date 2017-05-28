@@ -21,6 +21,7 @@ public class Ventana extends JFrame{
         paneles.put("Entrar", new Entrar(this));
         paneles.put("Tablero",new Tablero(this));
         
+        
         add(paneles.get("Principal"));
         setTitle("TANKER");
         setIconImage(loadImage("icon.jpg"));

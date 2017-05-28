@@ -1,7 +1,7 @@
 numero tanques
 
 POR CADA TANQUE
-posicion x,y
+posicion x,y angulo
 numero balas
 posicion cada bala x,y
 
