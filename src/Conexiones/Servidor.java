@@ -39,10 +39,11 @@ public class Servidor implements Runnable{
         String mensajeSaliente="";
         int contador=0;
         while(true){
-            mensajeSaliente=tablero.getDatos();
+            //mensajeSaliente=tablero.getDatos();
+            mensajeSaliente="";
             for (int i = 0; i < numero; i++) {                    
                 mensajeEntrante= cliente[i].escribirMensaje(cliente[i].getSc());  
-               // mensajeSaliente+=mensajeEntrante+" ";
+               mensajeSaliente+=mensajeEntrante+" ";
             }
              for (int i = 0; i < numero; i++) {                    
                
