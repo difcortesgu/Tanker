@@ -28,7 +28,7 @@ public class Tablero extends JPanel implements ActionListener{
     private final JButton atras;
     private boolean controles;//True = mouse / False = teclado 
     private boolean viento;
-    
+    private String datos;
     public Tablero(Ventana menu) {
         
         this.menu = menu; 
@@ -57,14 +57,33 @@ public class Tablero extends JPanel implements ActionListener{
     public ArrayList<Elemento> getElementos() {
         return elementos;
     }
+    public Tanque getTanque(){
+        for (Elemento i: elementos) {
+            if(i instanceof Tanque){
+             return (Tanque) i;   
+            }
+            
+        }   
+        return null;
+    }
 
     public void setElementos(ArrayList<Elemento> elementos) {
         this.elementos = elementos;
     }
 
+    public String getDatos() {
+        return datos;
+    }
+
+    public void setDatos(String datos) {
+        this.datos = datos;
+    }
+    
+    
        
     @Override
     public void paintComponent(Graphics g){
+        
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -72,12 +91,22 @@ public class Tablero extends JPanel implements ActionListener{
         for(Elemento i: elementos){
             if(i instanceof Tanque){
                 ((Tanque) i).paintComponent(g2);
+                datos+=i.getX()+" ";
+                datos+=i.getY()+" ";
+                datos+=((Tanque) i).getBalas().size()+" ";
+                for (Bala j : ((Tanque) i).getBalas()) {
+                    datos+=j.getX()+" ";
+                    datos+=j.getY()+" ";
+                }
+                
             }
             if(i instanceof Obstaculo){
                 ((Obstaculo) i).PaintComponent(g2);
             }
         }
     }
+    
+   
         
     @Override
     public void actionPerformed(ActionEvent e) {

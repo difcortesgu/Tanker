@@ -21,7 +21,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     private int contador = 0;
     private final int TipoOruga; //para seleccionar qué tipo de oruga tendrá
     private final int TipoArmazon = 11;//por ahora es final porque no hay más jejeje
-    private boolean viento;
+    private boolean viento,click;
     
     public Tanque(double x, double y, double vx, double vy, double tamaño, int tipo, double vida,boolean viento, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
@@ -95,6 +95,32 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         this.balas = balas;
     }
 
+    public double getMx() {
+        return mx;
+    }
+
+    public void setMx(double mx) {
+        this.mx = mx;
+    }
+
+    public double getMy() {
+        return my;
+    }
+
+    public void setMy(double my) {
+        this.my = my;
+    }
+
+    public boolean isClick() {
+        return click;
+    }
+
+    public void setClick(boolean click) {
+        this.click = click;
+    }
+    
+    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         dx = (mx - (x + (tamaño / 2)));
@@ -155,10 +181,12 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         int x1 = (int) ((x + tamaño / 2) + (50 * Math.cos(a)));
         int y1 = (int) ((y + tamaño / 2) + (50 * Math.sin(a)));
         balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this,viento, tablero));
+        click= true;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        click=false;
     }
 
     @Override

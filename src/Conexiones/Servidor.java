@@ -4,12 +4,15 @@ import Conexiones.Canal;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import Tanker.Tablero;
 
 public class Servidor implements Runnable{
+    private Tablero tablero;
 
-    public Servidor() {
+    public Servidor(Tablero tablero) {
         Thread t= new Thread(this, "server");
         t.start();
+        this.tablero=tablero;
     }
     
     
@@ -33,13 +36,13 @@ public class Servidor implements Runnable{
             }
             
         String mensajeEntrante="";   
-        String mensajeSaliente;
+        String mensajeSaliente="";
         int contador=0;
         while(true){
-            mensajeSaliente="";
+            mensajeSaliente=tablero.getDatos();
             for (int i = 0; i < numero; i++) {                    
                 mensajeEntrante= cliente[i].escribirMensaje(cliente[i].getSc());  
-                mensajeSaliente+=mensajeEntrante+" ";
+               // mensajeSaliente+=mensajeEntrante+" ";
             }
              for (int i = 0; i < numero; i++) {                    
                

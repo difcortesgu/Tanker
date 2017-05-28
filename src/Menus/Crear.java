@@ -1,6 +1,7 @@
 package Menus;
 
 import Conexiones.*;
+import Tanker.Tablero;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -80,7 +81,7 @@ public class Crear extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-        Servidor s = new Servidor();
+        Servidor s = new Servidor((Tablero) ((Ventana)jFrame1).getPanel("Tablero"));
         Cliente c= new Cliente("localhost",(Ventana)jFrame1,this);
     }//GEN-LAST:event_crearActionPerformed
 

@@ -12,6 +12,7 @@ public class Cliente implements Runnable{
     
     private Socket cliente;
     private int n_tanques,n_balas,n_obstaculos;
+    private int mx, my;
     private int x,y,angulo;
     private String ip;
     private Ventana ventana;
@@ -20,6 +21,8 @@ public class Cliente implements Runnable{
     private DibujitosTablero cpanel;
     private int tipoOruga,tipoArmazon;
     private boolean click;
+    String mensajeLeido;
+    String mensajeUsuario;
     
     public Cliente (String ip,Ventana ventana, JPanel panel) {
         this.ip=ip;
@@ -27,7 +30,6 @@ public class Cliente implements Runnable{
         this.panel= panel;
         Thread t= new Thread(this, "client");
         t.start();
-        tablero= (Tablero) ventana.getPanel("Tablero");
     }
 
     public Socket getCliente() {
@@ -58,8 +60,6 @@ public class Cliente implements Runnable{
     public void run() {
     
          try {
-            
-             
             cliente = new Socket(ip,8000);
             
             //3.Abriendo flujos
@@ -70,19 +70,22 @@ public class Cliente implements Runnable{
             Scanner sc= new Scanner(flujoEntrada);
             System.out.println("entrada de datos");
             
-            String mensajeLeido="";
-            String mensajeUsuario = this.inicializar(sc);
+            mensajeLeido="";
+            mensajeUsuario = this.inicializar(sc);
             escritura.println(mensajeUsuario);
             mensajeLeido= sc.nextLine();
-            
-            
-            cpanel=new DibujitosTablero(x,y,angulo,tipoOruga,tipoArmazon,click);
-            ventana.getPaneles().put("Dibujios", cpanel);
+            tablero =new Tablero(ventana);
+            ventana.getPaneles().put("Tablero",tablero);
             ventana.Cambiar_panel("Tablero");
             panel.setVisible(false);
             
+            
             int contador =0;
-            while(true){               
+            while(true){  
+                mx=(int) tablero.getTanque().getMx();
+                my=(int) tablero.getTanque().getMy();
+                click= tablero.getTanque().isClick();
+                this.datos(mx, my, click);
                escritura.println(mensajeUsuario);
                mensajeLeido= sc.nextLine();
                if(contador>1000){
@@ -99,7 +102,10 @@ public class Cliente implements Runnable{
         
     } 
     
-    public void datos(Scanner sc){
+    public void datos(int mx, int my,boolean click){
+        mensajeUsuario=mx+" "+my+" "+click;
+    }
+    public void dibujar(Scanner sc){
         n_tanques=sc.nextInt();
         for (int i = 0; i < n_tanques; i++) {
             x=sc.nextInt();
@@ -125,5 +131,5 @@ public class Cliente implements Runnable{
          
         datos_in=tipoOruga+" "+tipoArmazon;
         return datos_in;
-     }   
+    }   
 }
