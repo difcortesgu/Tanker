@@ -121,7 +121,22 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     public void setMy(double my) {
         this.my = my;
     }
-    
+
+    public int getTipoOruga() {
+        return TipoOruga;
+    }
+
+    public void setTipoOruga(int TipoOruga) {
+        this.TipoOruga = TipoOruga;
+    }
+
+    public int getTipoArmazon() {
+        return TipoArmazon;
+    }
+
+    public void setTipoArmazon(int TipoArmazon) {
+        this.TipoArmazon = TipoArmazon;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
