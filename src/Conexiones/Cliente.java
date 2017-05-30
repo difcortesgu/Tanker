@@ -48,7 +48,12 @@ public class Cliente implements Runnable{
         iniciarDatos();
         ps1.println(sc2.nextLine());
         this.tablero=new Tablero(sc1.next(), sc1.nextBoolean(), ventana);
-        System.out.print(sc1.next());
+        
+        tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, true, sc1.nextInt());
+        tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, true, sc1.nextInt());
+        
+       
+       
         ventana.getPaneles().put("Tablero", tablero);
         ventana.Cambiar_panel("Tablero", "Espera");
         
