@@ -12,7 +12,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Canal implements Runnable{
+public class Canal{
 
     private InputStream in ;
     private OutputStream out;
@@ -20,7 +20,6 @@ public class Canal implements Runnable{
     private PrintStream ps1,ps2;
     private Scanner sc1,sc2;
     private File f;
-    private final Thread t;
     private final int numerotanque;
     private final Servidor s;
 
@@ -29,12 +28,9 @@ public class Canal implements Runnable{
         this.cliente = cliente;
         this.s = s;
         this.numerotanque = numerotanque;
-        
-        t = new Thread(this,"canal"+numerotanque+1);
-        t.start();
+        run();
     }
 
-    @Override
     public void run() {
         iniciarDatos();
         System.out.println("se conecto cliente"+(numerotanque+1));
