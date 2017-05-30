@@ -59,17 +59,17 @@ public class Jugar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Crear");
+        ((Ventana)jFrame1).Cambiar_panel("Crear","Jugar");
         this.setVisible(false);
     }//GEN-LAST:event_CrearActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Principal");
+        ((Ventana)jFrame1).Cambiar_panel("Principal","Jugar");
         this.setVisible(false);
     }//GEN-LAST:event_atrasActionPerformed
 
     private void EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntrarActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Entrar");
+        ((Ventana)jFrame1).Cambiar_panel("Entrar","Jugar");
         this.setVisible(false);
     }//GEN-LAST:event_EntrarActionPerformed
 

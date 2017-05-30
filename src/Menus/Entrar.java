@@ -1,7 +1,6 @@
 package Menus;
 
 import Conexiones.Cliente;
-import Tanker.Tablero;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -76,11 +75,6 @@ public class Entrar extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        partidas.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                partidasPropertyChange(evt);
-            }
-        });
         jScrollPane1.setViewportView(partidas);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 560, 210));
@@ -95,15 +89,13 @@ public class Entrar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Principal");
-        this.setVisible(false);
+        ((Ventana)jFrame1).Cambiar_panel("Principal","Entrar");
     }//GEN-LAST:event_atrasActionPerformed
 
-    private void partidasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_partidasPropertyChange
-    }//GEN-LAST:event_partidasPropertyChange
-
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        Cliente c = new Cliente("localhost",(Ventana)jFrame1,this);
+        ((Ventana)jFrame1).Cambiar_panel("Espera", "Entrar");
+        ((Espera)((Ventana)jFrame1).getPanel("Espera")).getIniciar().setVisible(false);
+        Cliente c = new Cliente("localhost",(Ventana)jFrame1);
     }//GEN-LAST:event_entrarActionPerformed
 
         @Override

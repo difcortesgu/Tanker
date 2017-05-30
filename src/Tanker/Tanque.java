@@ -14,14 +14,14 @@ import javax.swing.ImageIcon;
 
 public class Tanque extends Elemento implements MouseMotionListener, MouseListener,KeyListener , Runnable{
 
-    private double dx,dy,mx,my;
+    private double dx,dy,mx,my,aceleracion;
     private final double daño;
     private ArrayList<Bala> balas;
     private Image tanque;
     private int contador = 0;
     private final int TipoOruga; //para seleccionar qué tipo de oruga tendrá
     private final int TipoArmazon = 11;//por ahora es final porque no hay más jejeje
-    private boolean viento,click;
+    private final boolean viento;
     
     public Tanque(double x, double y, double vx, double vy, double tamaño, int tipo, double vida,boolean viento, Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
@@ -87,6 +87,14 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         balas.remove(i);
     }
 
+    public double getAceleracion() {
+        return aceleracion;
+    }
+
+    public void setAceleracion(double aceleracion) {
+        this.aceleracion = aceleracion;
+    }
+
     public ArrayList<Bala> getBalas() {
         return balas;
     }
@@ -110,15 +118,6 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     public void setMy(double my) {
         this.my = my;
     }
-
-    public boolean isClick() {
-        return click;
-    }
-
-    public void setClick(boolean click) {
-        this.click = click;
-    }
-    
     
 
     @Override
@@ -181,12 +180,12 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         int x1 = (int) ((x + tamaño / 2) + (50 * Math.cos(a)));
         int y1 = (int) ((y + tamaño / 2) + (50 * Math.sin(a)));
         balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this,viento, tablero));
-        click= true;
+        aceleracion= balas.get(balas.size()-1).getA();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        click=false;
+        
     }
 
     @Override

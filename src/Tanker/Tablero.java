@@ -29,6 +29,7 @@ public class Tablero extends JPanel implements ActionListener{
     private boolean controles;//True = mouse / False = teclado 
     private boolean viento;
     private String datos;
+    
     public Tablero(Ventana menu) {
         
         this.menu = menu; 
@@ -36,8 +37,7 @@ public class Tablero extends JPanel implements ActionListener{
         atras = new JButton();
         atras.setText("atras");
         atras.addActionListener((ActionEvent evt) -> {
-            menu.Cambiar_panel("Jugar");
-            setVisible(false);
+            menu.Cambiar_panel("Jugar","Tablero");
         });
         add(atras, new AbsoluteConstraints(10, 10, -1, -1));
         

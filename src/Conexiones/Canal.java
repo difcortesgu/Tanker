@@ -1,76 +1,71 @@
 package Conexiones;
 
+import Conexiones.Servidor;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Canal{
+public class Canal implements Runnable{
+
+    private InputStream in ;
+    private OutputStream out;
+    private final Socket cliente;
+    private PrintStream ps1,ps2;
+    private Scanner sc1,sc2;
+    private File f;
+    private final Thread t;
+    private final int numerotanque;
+    private final Servidor s;
+
+    public Canal(Socket cliente,int numerotanque,Servidor s) {
+        
+        this.cliente = cliente;
+        this.s = s;
+        this.numerotanque = numerotanque;
+        
+        t = new Thread(this,"canal"+numerotanque+1);
+        t.start();
+    }
+
+    @Override
+    public void run() {
+        iniciarDatos();
+        System.out.println("se conecto cliente"+(numerotanque+1));
+        while(true){
+            System.out.println(sc1.nextLine());
+        }
+    }
+
+    private void iniciarDatos(){
+        f= new File("datos_S.txt");
+        if(!f.exists()){
+            try {
+                f.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Canal.class.getName()).log(Level.SEVERE, null, ex);
+            }        
+        }
+        try {
+            sc2= new Scanner(f);
+            ps2=new PrintStream(f);
+            out = cliente.getOutputStream();
+            in = cliente.getInputStream();
+            sc1 = new Scanner(in);
+            ps1 = new PrintStream(out);
+            sc1.useDelimiter(",");
+            sc2.useDelimiter(",");        
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Canal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Canal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
-    OutputStream flujoSalida;
-    InputStream flujoEntrada;
-    Scanner sc;
-    PrintWriter escritura;
-    String mensaje;
-    Socket socket;
-
-    public Canal() {
-        
-    }
-    public void inicializar(Socket socket) throws IOException{
-        this.socket= socket;
-        flujoSalida= socket.getOutputStream();
-        flujoEntrada=socket.getInputStream();
-        sc=new Scanner(flujoEntrada);
-        escritura= new PrintWriter(flujoSalida,true);
-        mensaje= " ";
-        
-    }
-    public String escribirMensaje(Scanner scanner){
-        mensaje=scanner.nextLine();
-        return mensaje;
-    }
-
-    public OutputStream getFlujoSalida() {
-        return flujoSalida;
-    }
-
-    public void setFlujoSalida(OutputStream flujoSalida) {
-        this.flujoSalida = flujoSalida;
-    }
-
-    public InputStream getFlujoEntrada() {
-        return flujoEntrada;
-    }
-
-    public void setFlujoEntrada(InputStream flujoEntrada) {
-        this.flujoEntrada = flujoEntrada;
-    }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void setSc(Scanner sc) {
-        this.sc = sc;
-    }
-
-    public PrintWriter getEscritura() {
-        return escritura;
-    }
-
-    public void setEscritura(PrintWriter escritura) {
-        this.escritura = escritura;
-    }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-
 }

@@ -1,7 +1,8 @@
 package Menus;
 
+import Conexiones.Servidor;
 import Conexiones.*;
-import Tanker.Tablero;
+import Menus.Ventana;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -10,6 +11,7 @@ public class Crear extends javax.swing.JPanel {
 
     public Crear(Ventana m) {
         initComponents();
+        modo="ffa";
         this.jFrame1 = m;
     }
 
@@ -17,6 +19,8 @@ public class Crear extends javax.swing.JPanel {
     private void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         nombre = new javax.swing.JTextPane();
         viento = new javax.swing.JToggleButton();
@@ -24,6 +28,7 @@ public class Crear extends javax.swing.JPanel {
         teams = new javax.swing.JRadioButton();
         crear = new javax.swing.JButton();
         atras = new javax.swing.JButton();
+        etiqueta_nombre = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -38,8 +43,6 @@ public class Crear extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nombre.setText(" /*ingresa el nombre del servidor*/");
-        nombre.setToolTipText("");
         jScrollPane1.setViewportView(nombre);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 260, 30));
@@ -47,6 +50,8 @@ public class Crear extends javax.swing.JPanel {
         viento.setText("viento");
         add(viento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, -1));
 
+        buttonGroup1.add(ffa);
+        ffa.setSelected(true);
         ffa.setText("Todos contra todos");
         ffa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,6 +60,7 @@ public class Crear extends javax.swing.JPanel {
         });
         add(ffa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
 
+        buttonGroup1.add(teams);
         teams.setText("Por equipos");
         teams.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,26 +84,26 @@ public class Crear extends javax.swing.JPanel {
             }
         });
         add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        etiqueta_nombre.setText("Nombre del servidor");
+        add(etiqueta_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-        Servidor s = new Servidor((Tablero) ((Ventana)jFrame1).getPanel("Tablero"));
-        Cliente c= new Cliente("localhost",(Ventana)jFrame1,this);
+        s = new Servidor(viento.isSelected(), "fondo", modo);
+        ((Ventana)jFrame1).Cambiar_panel("Espera","Crear");
     }//GEN-LAST:event_crearActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Jugar");
-        this.setVisible(false);
+        ((Ventana)jFrame1).Cambiar_panel("Jugar","Crear");
     }//GEN-LAST:event_atrasActionPerformed
 
     private void ffaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ffaActionPerformed
-        ffa.setSelected(true);
-        teams.setSelected(false);
+        modo = "ffa";
     }//GEN-LAST:event_ffaActionPerformed
 
     private void teamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamsActionPerformed
-        ffa.setSelected(false);
-        teams.setSelected(true);
+        modo = "teams";
     }//GEN-LAST:event_teamsActionPerformed
 
             @Override
@@ -113,11 +119,18 @@ public class Crear extends javax.swing.JPanel {
         return image;
     }
 
-    
+    public Servidor getS() {
+        return s;
+    }
 
+    private String modo;
+    private Servidor s;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton crear;
+    private javax.swing.JLabel etiqueta_nombre;
     private javax.swing.JRadioButton ffa;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JScrollPane jScrollPane1;

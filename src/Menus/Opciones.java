@@ -90,7 +90,7 @@ public class Opciones extends javax.swing.JPanel {
     }//GEN-LAST:event_tecladoActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Principal");
+        ((Ventana)jFrame1).Cambiar_panel("Principal","Opciones");
         this.setVisible(false);
     }//GEN-LAST:event_atrasActionPerformed
 

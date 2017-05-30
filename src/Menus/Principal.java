@@ -56,12 +56,12 @@ public class Principal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Jugar");
+        ((Ventana)jFrame1).Cambiar_panel("Jugar","Principal");
         this.setVisible(false);
     }//GEN-LAST:event_jugarActionPerformed
 
     private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Opciones");
+        ((Ventana)jFrame1).Cambiar_panel("Opciones","Principal");
         this.setVisible(false);
     }//GEN-LAST:event_opcionesActionPerformed
 
