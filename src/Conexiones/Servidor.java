@@ -37,8 +37,8 @@ public class Servidor implements Runnable{
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        ms = sc.nextLine()+"\n";
+        System.out.println("iniciar tablero.end.");
+        ms = sc.nextLine();  //lee datos servidor  para iniciar tablero
         canales = new ArrayList();
         t= new Thread(this,"servidor");
         t.start();
@@ -69,15 +69,16 @@ public class Servidor implements Runnable{
         try {
 
             servidor= new ServerSocket(6000);
-            System.out.println("esperando clientes");
             while(!jugar){
                 canales.add(new Canal(servidor.accept(),i,this));
                 i++;
             }
+            
             for(Canal j:canales){
-                ms += j.getMu()+(i-1)+","+"\n";
+                ms += j.getMu()+(i-1)+",";
+                System.out.print(ms);
             }
-            System.out.println(ms);
+           
             canales.forEach((j)->{
                 j.escribir(ms);
             });
