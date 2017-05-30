@@ -17,18 +17,19 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     private double dx,dy,mx,my,aceleracion;
     private final double daño;
     private ArrayList<Bala> balas;
-    private Image tanque;
+    private Image oruga,armazon;
     private int contador = 0;
-    private final int TipoOruga; //para seleccionar qué tipo de oruga tendrá
-    private final int TipoArmazon = 11;//por ahora es final porque no hay más jejeje
+    private int TipoOruga; //para seleccionar qué tipo de oruga tendrá
+    private int TipoArmazon;//por ahora es final porque no hay más jejeje
     private final boolean viento;
     
-    public Tanque(double x, double y, double vx, double vy, double tamaño, int tipo, double vida,boolean viento, Tablero tablero) {
-        super(x, y, vx, vy, tamaño, vida, tablero);
+    public Tanque(double x, double y,int tipoArmazon,int tipoOruga, int vida ,int daño,boolean viento, Tablero tablero) {
+        super(x, y,100, vida, tablero);
         this.viento=viento;
-        daño = 50;
+        this.daño = daño;
         balas = new ArrayList();
-        this.TipoOruga = tipo;
+        this.TipoArmazon=tipoArmazon;
+        this.TipoOruga = tipoOruga;
         Thread t = new Thread(this, "tank");
         t.start();
     }
@@ -59,25 +60,27 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
 
     public void pintarTanque(Graphics2D g) {
 
-        tanque = loadImage("Tanque.png");
+        oruga = loadImage("Tanque.png");
+        armazon = loadImage("Rojos.png");
+        
 
         a = Math.toDegrees(a);
         
         int i = (int) (Math.floor((a) / 15) % 6);
         if (a<90) {
             i = 6 - i;//invierte rotacion de giro
-            g.drawImage(tanque,  (int) x, (int) (y + tamaño),(int) (x + tamaño), (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);            
-            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(armazon,  (int) x, (int) (y + tamaño),(int) (x + tamaño), (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);            
+            g.drawImage(oruga, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
         } else if (a < 180) {
-            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
-            g.drawImage(tanque,  (int) (x + tamaño), (int) (y + tamaño),(int) x, (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(armazon, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(oruga,  (int) (x + tamaño), (int) (y + tamaño),(int) x, (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         } else if (a < 270) {
             i = 6 - i; 
-            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
-            g.drawImage(tanque, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(armazon, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(oruga, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         } else {
-            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
-            g.drawImage(tanque, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(armazon, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(oruga, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         }
         a = Math.toRadians(a);
     }

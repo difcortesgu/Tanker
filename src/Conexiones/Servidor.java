@@ -18,9 +18,9 @@ public class Servidor implements Runnable{
     private final Thread t;
     private File datos;
     private ServerSocket servidor;
-    private PrintStream ps;
     private Scanner sc;
     private boolean jugar;
+    private String ms;
 
     public Servidor(boolean viento, String fondo, String modo) {
         jugar=false;
@@ -33,13 +33,12 @@ public class Servidor implements Runnable{
             }
         }
         try {
-            ps = new PrintStream(datos);
             sc = new Scanner(datos);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+        ms = sc.nextLine()+"\n";
         canales = new ArrayList();
         t= new Thread(this,"servidor");
         t.start();
@@ -74,8 +73,15 @@ public class Servidor implements Runnable{
             while(!jugar){
                 canales.add(new Canal(servidor.accept(),i,this));
                 i++;
-
             }
+            for(Canal j:canales){
+                ms += j.getMu()+(i-1)+","+"\n";
+            }
+            System.out.println(ms);
+            canales.forEach((j)->{
+                j.escribir(ms);
+            });
+            
 
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);

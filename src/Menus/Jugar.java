@@ -15,6 +15,8 @@ public class Jugar extends javax.swing.JPanel {
 
     public Jugar(Ventana m) {
         initComponents();
+        armazon.setValue(1);
+        oruga.setValue(1);
         File f= new File("datos_J.txt");
         if(!f.exists()){
             try {
@@ -125,21 +127,21 @@ public class Jugar extends javax.swing.JPanel {
     }//GEN-LAST:event_EntrarActionPerformed
 
     private void armazonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_armazonStateChanged
-        if((int)armazon.getValue() < 0){
-            armazon.setValue(0);
+        if((int)armazon.getValue() < 1){
+            armazon.setValue(1);
         }
-        if((int)armazon.getValue()>3){
-            armazon.setValue(3);
+        if((int)armazon.getValue()>4){
+            armazon.setValue(4);
         }
         repaint();
     }//GEN-LAST:event_armazonStateChanged
 
     private void orugaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_orugaStateChanged
-        if((int)oruga.getValue()<0){
-            oruga.setValue(0);
+        if((int)oruga.getValue()<1){
+            oruga.setValue(1);
         }
-        if((int)oruga.getValue()>3){
-            oruga.setValue(3);
+        if((int)oruga.getValue()>4){
+            oruga.setValue(4);
         }
         repaint();
     }//GEN-LAST:event_orugaStateChanged
@@ -148,10 +150,10 @@ public class Jugar extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         //g.drawImage(loadImage ("fondo1.jpg"), 0, 0, null);
-        tipoArmazon=(int)armazon.getValue()+11;
-        tipoOruga= (2*(int)(oruga.getValue()));
+        tipoArmazon=(int)armazon.getValue()-1;
+        tipoOruga= 2*((int)(oruga.getValue())-1);
         g.drawImage(loadImage("Tanque.png"), 150, 75, 350, 275, tipoOruga*181,0,(tipoOruga+1)* 181,181,this);
-        g.drawImage(loadImage("Tanque.png"), 150, 75, 350, 275, tipoArmazon*181,0, (tipoArmazon+1)*181,181,this);
+        g.drawImage(loadImage("Rojos.png"), 150, 75, 350, 275, tipoArmazon*181,0, (tipoArmazon+1)*181,181,this);
 
     }
 

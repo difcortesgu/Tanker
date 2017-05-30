@@ -2,7 +2,6 @@ package Conexiones;
 
 import Menus.Ventana;
 import Tanker.Tablero;
-import Tanker.Tanque;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,9 +33,6 @@ public class Cliente implements Runnable{
         this.a=0;
         this.ip = ip;
         this.ventana=ventana;
-        this.tablero=new Tablero(ventana);
-        ventana.getPaneles().put("Tablero", tablero);
-        ventana.Cambiar_panel("Tablero", "Espera");
         t = new Thread(this,"cliente");
         try {
             cliente = new Socket(ip,6000);
@@ -50,16 +46,22 @@ public class Cliente implements Runnable{
     @Override
     public void run() {              
         iniciarDatos();
-        while(true){  
-            mx=(int) tablero.getTanque().getMx();
-            my=(int) tablero.getTanque().getMy();
-            a=(int) tablero.getTanque().getA();
-            ps1.println(mx+","+my+","+a+",");
-        }    
+        ps1.println(sc2.nextLine());
+        this.tablero=new Tablero(sc1.next(), sc1.nextBoolean(), ventana);
+        System.out.print(sc1.next());
+        ventana.getPaneles().put("Tablero", tablero);
+        ventana.Cambiar_panel("Tablero", "Espera");
+        
+        /*        while(true){
+        mx=(int) tablero.getTanque().getMx();
+        my=(int) tablero.getTanque().getMy();
+        a=(int) tablero.getTanque().getA();
+        ps1.println(mx+","+my+","+a+",");
+    }    */    
     }
     
     private void iniciarDatos(){
-        File datos = new File("datos_J.txt");
+        datos = new File("datos_J.txt");
         try {
             sc2 = new Scanner(datos);
         } catch (FileNotFoundException ex) {

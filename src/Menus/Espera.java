@@ -18,6 +18,7 @@ public class Espera extends javax.swing.JPanel {
     private void initComponents() {
 
         Iniciar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         Iniciar.setText("Iniciar");
         Iniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -26,19 +27,28 @@ public class Espera extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Esperando");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(245, 245, 245)
-                .addComponent(Iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(Iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(275, 275, 275)
+                        .addComponent(jLabel1)))
                 .addContainerGap(265, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
+                .addGap(106, 106, 106)
+                .addComponent(jLabel1)
+                .addGap(81, 81, 81)
                 .addComponent(Iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(218, Short.MAX_VALUE))
         );
@@ -64,5 +74,6 @@ public class Espera extends javax.swing.JPanel {
     private Ventana ventana;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Iniciar;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
