@@ -36,6 +36,8 @@ public class Canal{
         iniciarDatos();
         System.out.println("se conecto cliente"+(numerotanque+1));
         mu=sc1.nextLine();
+ 
+       
     }
 
     private void iniciarDatos(){
@@ -63,6 +65,23 @@ public class Canal{
     public void setMu(String mu) {
         this.mu = mu;
     }
+
+    public PrintStream getPs1() {
+        return ps1;
+    }
+
+    public void setPs1(PrintStream ps1) {
+        this.ps1 = ps1;
+    }
+
+    public Scanner getSc1() {
+        return sc1;
+    }
+
+    public void setSc1(Scanner sc1) {
+        this.sc1 = sc1;
+    }
+    
     
     
 }

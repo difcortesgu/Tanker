@@ -1,7 +1,9 @@
 package Conexiones;
 
 import Menus.Ventana;
+import Tanker.Elemento;
 import Tanker.Tablero;
+import Tanker.Tanque;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,21 +50,43 @@ public class Cliente implements Runnable{
         iniciarDatos();
         ps1.println(sc2.nextLine());
         this.tablero=new Tablero(sc1.next(), sc1.nextBoolean(), ventana);
+        int n=sc1.nextInt();
+        int armazon=sc1.nextInt();
+        int oruga=sc1.nextInt();
+        int posicion=sc1.nextInt();
         
-        tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, true, sc1.nextInt());
-        tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, true, sc1.nextInt());
+        for (int i = 0; i < n; i++) {
+         tablero.addTanque(armazon,oruga, 100,100, true,posicion );  
+        }
         
-       
-       
         ventana.getPaneles().put("Tablero", tablero);
         ventana.Cambiar_panel("Tablero", "Espera");
         
-        /*        while(true){
-        mx=(int) tablero.getTanque().getMx();
-        my=(int) tablero.getTanque().getMy();
-        a=(int) tablero.getTanque().getA();
-        ps1.println(mx+","+my+","+a+",");
-    }    */    
+        while(true){   
+            
+            mx=(int) tablero.getTanque().getMx();
+            my=(int) tablero.getTanque().getMy();
+            a=(int) tablero.getTanque().getA();
+    
+            ps1.println(mx+","+my+","+a+",");
+        int  mx2;
+        int my2;
+            String a2;
+        int c=0;
+        for (Elemento t: tablero.getElementos()) 
+        if(t instanceof Tanque){
+             mx2 =sc1.nextInt();
+            my2= sc1.nextInt();
+             a2=sc1.next();
+             System.out.println("cliente "+mx2+" "+my2+" "+a2);
+             ((Tanque) t).setMx(mx2);
+             ((Tanque) t).setMy(my2);
+               
+             //((Tanque) t).setA(a2);
+             c++;
+             System.out.println(c);
+        }
+        }       
     }
     
     private void iniciarDatos(){

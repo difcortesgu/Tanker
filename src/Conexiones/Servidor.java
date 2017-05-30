@@ -73,15 +73,29 @@ public class Servidor implements Runnable{
                 canales.add(new Canal(servidor.accept(),i,this));
                 i++;
             }
-            
+            ms +=i+",";
+            System.out.println(i+"  i");
+            int posicion=0;
             for(Canal j:canales){
-                ms += j.getMu()+(i-1)+",";
-                System.out.print(ms);
+                ms += j.getMu()+posicion+",";
+                System.out.println(posicion+" p");
+                posicion++;
             }
            
             canales.forEach((j)->{
                 j.escribir(ms);
             });
+            while(true){
+            ms="";
+            for(Canal j:canales){
+            ms += j.getSc1().nextLine();
+            }
+            System.out.println(ms);
+            canales.forEach((j)->{
+            j.escribir(ms);
+            });
+            }
+            
             
 
         } catch (IOException ex) {
