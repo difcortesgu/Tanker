@@ -103,7 +103,7 @@ public class Entrar extends javax.swing.JPanel {
     }//GEN-LAST:event_partidasPropertyChange
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        Cliente c = new Cliente("localhost",(Ventana)jFrame1,this);
+        Cliente c = new Cliente("192.168.0.1",(Ventana)jFrame1,this);
     }//GEN-LAST:event_entrarActionPerformed
 
         @Override
