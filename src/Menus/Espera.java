@@ -2,7 +2,6 @@ package Menus;
 
 import Conexiones.Cliente;
 import Conexiones.Servidor;
-import Menus.Ventana;
 import javax.swing.JButton;
 
 public class Espera extends javax.swing.JPanel {
