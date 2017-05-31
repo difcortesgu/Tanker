@@ -10,9 +10,10 @@ public class Crear extends javax.swing.JPanel {
     public Crear(Ventana m) {
         initComponents();
         fondos.setValue(1);
+        viento.setSelected(true);
         fondo="fondo1.png";
         modo="ffa";
-        wind=false;
+        wind=true;
         this.jFrame1 = m;
 
     }

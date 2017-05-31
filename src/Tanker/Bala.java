@@ -50,8 +50,8 @@ public class Bala extends Elemento{
     @Override
     public void actionPerformed(ActionEvent e) {
               
-        vx+=dvx/500;
-        vy+=dvy/500;
+        vx+=dvx/100;
+        vy+=dvy/100;
         x+=vx;
         y+=vy;
     }

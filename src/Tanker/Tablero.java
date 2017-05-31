@@ -44,29 +44,15 @@ public class Tablero extends JPanel implements ActionListener{
         add(atras, new AbsoluteConstraints(10, 10, -1, -1));
         
         elementos = new ArrayList();
-                switch(this.fondo){
-            case "fondo1.png": 
-                elementos.add(new Obstaculo(100, 100, 50, 500, this));
-                elementos.add(new Obstaculo(300, 100, 50, 500, this));
-                elementos.add(new Obstaculo(100, 300, 50, 500, this));
-                elementos.add(new Obstaculo(300, 300, 50, 500, this));
-            case "fondo2.png":
-                elementos.add(new Obstaculo(100, 100, 50, 500, this));
-                elementos.add(new Obstaculo(300, 100, 50, 500, this));
-                elementos.add(new Obstaculo(100, 300, 50, 500, this));
-                elementos.add(new Obstaculo(300, 300, 50, 500, this));
-            case "fondo3.png":
-                elementos.add(new Obstaculo(100, 100, 50, 500, this));
-                elementos.add(new Obstaculo(300, 100, 50, 500, this));
-                elementos.add(new Obstaculo(100, 300, 50, 500, this));
-                elementos.add(new Obstaculo(300, 300, 50, 500, this));                
-            case "fondo4.png":
-                elementos.add(new Obstaculo(100, 100, 50, 500, this));
-                elementos.add(new Obstaculo(300, 100, 50, 500, this));
-                elementos.add(new Obstaculo(100, 300, 50, 500, this));
-                elementos.add(new Obstaculo(300, 300, 50, 500, this));
-        }
-        timer = new Timer(1,this);
+        elementos.add(new Obstaculo(200, 200, 50, 200, this));
+        elementos.add(new Obstaculo(120, 500, 50, 200, this));
+        elementos.add(new Obstaculo(300, 500, 50, 200, this));
+        elementos.add(new Obstaculo(500, 300, 50, 200, this));
+        elementos.add(new Obstaculo(700, 100, 50, 200, this));
+        elementos.add(new Obstaculo(800, 500, 50, 200, this));
+        elementos.add(new Obstaculo(950, 400, 50, 200, this));
+        elementos.add(new Obstaculo(900, 100, 50, 200, this));
+          timer = new Timer(1,this);
         timer.start();               
     }
 

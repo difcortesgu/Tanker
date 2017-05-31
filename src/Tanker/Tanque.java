@@ -10,6 +10,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import static java.lang.Math.PI;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 public class Tanque extends Elemento implements MouseMotionListener, MouseListener,KeyListener , Runnable{
@@ -24,6 +26,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     private final boolean viento;
     private boolean click;
     private String equipo,modo;
+    private Random r;
     
     public Tanque(double x, double y,int tipoArmazon,int tipoOruga, int vida ,int daño,boolean viento, Tablero tablero) {
         super(x, y,50, vida, tablero);
@@ -246,7 +249,8 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     public void disparar(){
         int x1 = (int) ((x + tamaño / 2) + (50 * Math.cos(a)));
         int y1 = (int) ((y + tamaño / 2) + (50 * Math.sin(a)));
-        aceleracion=(Math.random()-Math.random())%2*PI;
+        r = new Random(new Date().getTime());
+        aceleracion = ((PI+r.nextDouble())-r.nextDouble());
         balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this,aceleracion, tablero));
         click=false;
     }

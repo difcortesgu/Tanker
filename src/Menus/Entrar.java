@@ -3,17 +3,12 @@ package Menus;
 import Conexiones.Cliente;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class Entrar extends javax.swing.JPanel {
 
     public Entrar(Ventana m) {
         initComponents();
-       
-        IP="localhost";
         this.ingresarIP.setText("localhost");
         this.jFrame1 = m;
     }
@@ -76,15 +71,13 @@ public class Entrar extends javax.swing.JPanel {
        
             ((Ventana)jFrame1).Cambiar_panel("Espera", "Entrar");
             ((Espera)((Ventana)jFrame1).getPanel("Espera")).getIniciar().setVisible(false);
-            Cliente c = new Cliente("localhost",(Ventana)jFrame1);            
+            Cliente c = new Cliente(ingresarIP.getText(),(Ventana)jFrame1);            
         
                 
     }//GEN-LAST:event_entrarActionPerformed
 
     private void ingresarIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarIPActionPerformed
-       
-        IP=ingresarIP.getText();
-       
+
     }//GEN-LAST:event_ingresarIPActionPerformed
 
         @Override
@@ -99,8 +92,6 @@ public class Entrar extends javax.swing.JPanel {
         Image image = ii.getImage();
         return image;
     }
-
-    private String IP;
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;
