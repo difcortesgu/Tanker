@@ -3,6 +3,7 @@ package Menus;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class Opciones extends javax.swing.JPanel {
 
@@ -22,6 +23,10 @@ public class Opciones extends javax.swing.JPanel {
         mouse = new javax.swing.JRadioButton();
         teclado = new javax.swing.JRadioButton();
         slider_sonido = new javax.swing.JSlider();
+        jpInstruccionesTeclado = new javax.swing.JPanel();
+        jlImageTeclado = new javax.swing.JLabel();
+        jdInstruccionesMouse = new javax.swing.JPanel();
+        jlMouseIcon = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -72,6 +77,44 @@ public class Opciones extends javax.swing.JPanel {
             }
         });
         add(slider_sonido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 260, -1));
+
+        jlImageTeclado.setIcon(new ImageIcon("gifteclado.gif"));
+
+        javax.swing.GroupLayout jpInstruccionesTecladoLayout = new javax.swing.GroupLayout(jpInstruccionesTeclado);
+        jpInstruccionesTeclado.setLayout(jpInstruccionesTecladoLayout);
+        jpInstruccionesTecladoLayout.setHorizontalGroup(
+            jpInstruccionesTecladoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpInstruccionesTecladoLayout.createSequentialGroup()
+                .addComponent(jlImageTeclado)
+                .addGap(0, 180, Short.MAX_VALUE))
+        );
+        jpInstruccionesTecladoLayout.setVerticalGroup(
+            jpInstruccionesTecladoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpInstruccionesTecladoLayout.createSequentialGroup()
+                .addComponent(jlImageTeclado)
+                .addGap(0, 130, Short.MAX_VALUE))
+        );
+
+        add(jpInstruccionesTeclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 180, 130));
+
+        jlMouseIcon.setIcon(new ImageIcon("gifcursor.gif"));
+
+        javax.swing.GroupLayout jdInstruccionesMouseLayout = new javax.swing.GroupLayout(jdInstruccionesMouse);
+        jdInstruccionesMouse.setLayout(jdInstruccionesMouseLayout);
+        jdInstruccionesMouseLayout.setHorizontalGroup(
+            jdInstruccionesMouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdInstruccionesMouseLayout.createSequentialGroup()
+                .addComponent(jlMouseIcon)
+                .addGap(0, 146, Short.MAX_VALUE))
+        );
+        jdInstruccionesMouseLayout.setVerticalGroup(
+            jdInstruccionesMouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdInstruccionesMouseLayout.createSequentialGroup()
+                .addComponent(jlMouseIcon)
+                .addGap(0, 116, Short.MAX_VALUE))
+        );
+
+        add(jdInstruccionesMouse, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void slider_sonidoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slider_sonidoStateChanged
@@ -80,7 +123,7 @@ public class Opciones extends javax.swing.JPanel {
 
     private void mouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mouseActionPerformed
         teclado.setSelected(false);
-        mouse.setSelected(true);
+        mouse.setSelected(true);        
     }//GEN-LAST:event_mouseActionPerformed
 
     private void tecladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tecladoActionPerformed
@@ -118,6 +161,10 @@ public class Opciones extends javax.swing.JPanel {
     private javax.swing.JButton atras;
     private javax.swing.JLabel controles;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JPanel jdInstruccionesMouse;
+    private javax.swing.JLabel jlImageTeclado;
+    private javax.swing.JLabel jlMouseIcon;
+    private javax.swing.JPanel jpInstruccionesTeclado;
     private javax.swing.JRadioButton mouse;
     private javax.swing.JSlider slider_sonido;
     private javax.swing.JLabel sonido;
