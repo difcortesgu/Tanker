@@ -70,10 +70,10 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         armazon = loadImage("Rojos.png");
         
 
-        a = Math.toDegrees(a);
+        this.a = Math.toDegrees(this.a);
         
-        int i = (int) (Math.floor((a) / 15) % 6);
-        if (a<90) {
+        int i = (int) (Math.floor((this.a) / 15) % 6);
+        if (this.a<90) {
             i = 6 - i;//invierte rotacion de giro
             g.drawImage(armazon,  (int) x, (int) (y + tamaño),(int) (x + tamaño), (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);            
             g.drawImage(oruga, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
@@ -88,7 +88,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
             g.drawImage(oruga, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
             g.drawImage(armazon, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         }
-        a = Math.toRadians(a);
+        this.a = Math.toRadians(this.a);
     }
 
     public void eliminar_bala(int i) {
@@ -127,7 +127,22 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     public void setMy(double my) {
         this.my = my;
     }
-    
+
+    public int getTipoOruga() {
+        return TipoOruga;
+    }
+
+    public void setTipoOruga(int TipoOruga) {
+        this.TipoOruga = TipoOruga;
+    }
+
+    public int getTipoArmazon() {
+        return TipoArmazon;
+    }
+
+    public void setTipoArmazon(int TipoArmazon) {
+        this.TipoArmazon = TipoArmazon;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -29,7 +29,7 @@ public class Canal{
         comunicacion();
     }
 
-    public void comunicacion() {
+    public final void comunicacion() {
         iniciarDatos();
         //datos del costructor
         mu=sc1.nextLine();

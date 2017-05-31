@@ -12,7 +12,7 @@ public class Ventana extends JFrame{
 
     public Ventana() {
 
-        paneles = new HashMap();
+        paneles = new HashMap<>();
         paneles.put("Principal", new Principal(this));
         paneles.put("Jugar", new Jugar(this));
         paneles.put("Opciones", new Opciones(this));
@@ -50,12 +50,10 @@ public class Ventana extends JFrame{
         Ventana mb = new Ventana();
     }
 
-    public Image loadImage (String imageName) {
+    public final Image loadImage (String imageName) {
         ImageIcon ii = new ImageIcon (imageName);
         Image image = ii.getImage();
         return image;
-    }
-    
-
+    }    
         
 }
