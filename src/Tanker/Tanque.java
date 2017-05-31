@@ -246,7 +246,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         }
     }
 
-    public void disparar(){
+    public synchronized void disparar(){
         int x1 = (int) ((x + tamaño / 2) + (50 * Math.cos(a)));
         int y1 = (int) ((y + tamaño / 2) + (50 * Math.sin(a)));
         r = new Random(new Date().getTime());
