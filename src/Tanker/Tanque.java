@@ -251,7 +251,8 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         int y1 = (int) ((y + tamaño / 2) + (50 * Math.sin(a)));
         r = new Random(new Date().getTime());
         aceleracion = ((PI+r.nextDouble())-r.nextDouble());
-        balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this,aceleracion, tablero));
+        double a = 2*PI*(r.nextDouble() - r.nextDouble());
+        balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this,aceleracion, a,tablero));
         click=false;
     }
     

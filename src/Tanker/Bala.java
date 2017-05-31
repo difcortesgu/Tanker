@@ -9,21 +9,12 @@ public class Bala extends Elemento{
     private final double daño,dvx,dvy,aceleracion;
     private final Tanque tanque;
     
-    public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida,Tanque tanque,boolean viento, Tablero tablero) {
-        super(x, y, vx, vy, tamaño, vida, tablero);
-        this.aceleracion=0;
-        dvx=Math.cos(a);
-        dvy=Math.sin(a);
-        this.daño = daño;
-        this.tanque=tanque;
-        timer.setDelay(5);     
-        timer.start();
-    }
-    public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida,Tanque tanque,double aceleracion, Tablero tablero) {
+    public Bala(double daño, double x, double y, double vx, double vy, double tamaño, double vida,Tanque tanque,double aceleracion, double a,Tablero tablero) {
         super(x, y, vx, vy, tamaño, vida, tablero);
         this.aceleracion=aceleracion;
-        dvx=Math.cos(a);
-        dvy=Math.sin(a);
+        this.a = a;
+        dvx=Math.cos(this.a);
+        dvy=Math.sin(this.a);
         this.daño = daño;
         this.tanque=tanque;
         timer.setDelay(5);     
@@ -50,8 +41,8 @@ public class Bala extends Elemento{
     @Override
     public void actionPerformed(ActionEvent e) {
               
-        vx+=dvx/100;
-        vy+=dvy/100;
+        vx+=dvx/400;
+        vy+=dvy/400;
         x+=vx;
         y+=vy;
     }
