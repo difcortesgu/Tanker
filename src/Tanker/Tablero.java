@@ -35,6 +35,7 @@ public class Tablero extends JPanel implements ActionListener{
         this.modo=modo;
         this.menu = menu; 
         this.viento=viento;
+        this.fondo=fondo;
         atras = new JButton();
         atras.setText("atras");
         atras.addActionListener((ActionEvent evt) -> {

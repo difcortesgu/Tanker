@@ -28,6 +28,7 @@ public class Ventana extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+        
     }
 
     public JPanel getPanel(String s) {
