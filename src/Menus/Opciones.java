@@ -35,9 +35,7 @@ public class Opciones extends javax.swing.JPanel {
                 if(teniaAlgo){
                     a=sc1.nextInt();
                     b=sc1.nextInt();
-                    if(sc1.hasNextBoolean()){
-                        controls = sc1.nextBoolean();
-                    }
+                    controls = sc1.nextBoolean();                    
                     ps1 = new PrintStream(f);
                 }else{
                     ps1 = new PrintStream(f);
@@ -167,7 +165,7 @@ public class Opciones extends javax.swing.JPanel {
     }//GEN-LAST:event_slider_sonidoStateChanged
 
     private void mouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mouseActionPerformed
-       controls=true;
+        controls=true;
     }//GEN-LAST:event_mouseActionPerformed
 
     private void tecladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tecladoActionPerformed

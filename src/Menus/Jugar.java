@@ -33,12 +33,8 @@ public class Jugar extends javax.swing.JPanel {
             if(sc1.hasNext()){
                 armazon.setValue(sc1.nextInt());
                 oruga.setValue(sc1.nextInt());
-            }
-            if(sc1.hasNextBoolean()){
-               controles = sc1.hasNextBoolean();
-            }else{
-               controles=true;
-            }
+                controles = sc1.nextBoolean();
+            }                        
             ps1 = new PrintStream(f);
             sc1.close();
         } catch (FileNotFoundException ex) {
