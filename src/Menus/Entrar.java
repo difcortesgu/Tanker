@@ -89,7 +89,7 @@ public class Entrar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Principal","Entrar");
+        ((Ventana)jFrame1).Cambiar_panel("Jugar","Entrar");
     }//GEN-LAST:event_atrasActionPerformed
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed

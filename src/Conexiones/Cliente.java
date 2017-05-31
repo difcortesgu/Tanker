@@ -46,23 +46,44 @@ public class Cliente implements Runnable{
     @Override
     public void run() {              
         iniciarDatos();
+        //envio inicial
         ps1.println(sc2.nextLine());
+        
+        //Construccion de todos los Tableros de cada servidor
+        int j = sc1.nextInt();
         this.tablero=new Tablero(sc1.next(), sc1.nextBoolean(), ventana);
-        
-        tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, true, sc1.nextInt());
-        tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, true, sc1.nextInt());
-        
-       
-       
+        int n = sc1.nextInt();
+        System.out.println(j);
+        System.out.println(n);
+        for(int i=0;i<n;i++){
+            tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, true, j);    
+        }
         ventana.getPaneles().put("Tablero", tablero);
+        ventana.add(ventana.getPanel("Tablero"));
         ventana.Cambiar_panel("Tablero", "Espera");
         
-        /*        while(true){
-        mx=(int) tablero.getTanque().getMx();
-        my=(int) tablero.getTanque().getMy();
-        a=(int) tablero.getTanque().getA();
-        ps1.println(mx+","+my+","+a+",");
-    }    */    
+        //Ciclo principal del juego
+        while(true){
+            ps1.println((int)tablero.getTanque(j).getMx()+","+(int)tablero.getTanque(j).getMy()+","+tablero.getTanque(j).isClick()+","+(int)tablero.getTanque(j).getAceleracion());
+            for(int i=0;i<n;i++){
+                if(i!=j){
+                    tablero.getTanque(i).setMx(sc1.nextInt());
+                    tablero.getTanque(i).setMy(sc1.nextInt());
+                    tablero.getTanque(i).setClick(sc1.nextBoolean());
+                    tablero.getTanque(i).setAceleracion(sc1.nextDouble());
+                }else{
+                    sc1.next();
+                    sc1.next();
+                    sc1.next();
+                    sc1.next();
+                }
+                
+            }
+        }
+    }
+    
+    public void escribir(String sms){
+        ps1.print(sms);
     }
     
     private void iniciarDatos(){

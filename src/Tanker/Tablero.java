@@ -8,9 +8,6 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,13 +24,12 @@ public class Tablero extends JPanel implements ActionListener{
     private final Ventana menu;
     private final JButton atras;
     private boolean controles;//True = mouse / False = teclado 
-    private boolean viento;
+    private final boolean viento;
     private String datos;
     
     public Tablero(String fondo,boolean viento,Ventana menu) {
         
         this.menu = menu; 
-        this.controles=controles;
         this.viento=viento;
         atras = new JButton();
         atras.setText("atras");
@@ -52,33 +48,32 @@ public class Tablero extends JPanel implements ActionListener{
     }
     
     public void addTanque(int TipoArmazon,int TipoOruga,int vida,int daño,boolean controles,int numerotanque){
-        elementos.add(new Tanque(Math.random(), Math.random(), TipoArmazon, TipoOruga,vida,daño, viento, this));
-        int j=0;
-        for(Elemento i: elementos){
-            if(i instanceof Tanque){
-                if(j==numerotanque){
-                    if(controles){
-                        this.addMouseMotionListener((MouseMotionListener) elementos.get(numerotanque));
-                    }else{
-                        this.addKeyListener((KeyListener)elementos.get(numerotanque));
-                        this.setFocusable(true);
-                    }
-                    this.addMouseListener((MouseListener) elementos.get(numerotanque));
-                }
-                j++;
-            }
+        elementos.add(new Tanque(100+Math.random()%400, 100+Math.random()%300, TipoArmazon, TipoOruga,vida,daño, viento, this));
+        int j=0,h=0;
+        if(controles){
+            this.addMouseMotionListener(getTanque(numerotanque));
+        }else{
+            this.addKeyListener(getTanque(numerotanque));
+            this.setFocusable(true);
         }
+        this.addMouseListener(getTanque(numerotanque));
     }
-    public Tanque getTanque(){
+
+    public Tanque getTanque(int h){
+        int j=0;
         for (Elemento i: elementos) {
             if(i instanceof Tanque){
-             return (Tanque) i;   
+                if(h==j){
+                    return (Tanque) i;
+                }
+                j++;
             }
             
         }   
         return null;
     }
 
+    
     public void setElementos(ArrayList<Elemento> elementos) {
         this.elementos = elementos;
     }
@@ -103,14 +98,6 @@ public class Tablero extends JPanel implements ActionListener{
         for(Elemento i: elementos){
             if(i instanceof Tanque){
                 ((Tanque) i).paintComponent(g2);
-                datos+=i.getX()+" ";
-                datos+=i.getY()+" ";
-                datos+=((Tanque) i).getBalas().size()+" ";
-                for (Bala j : ((Tanque) i).getBalas()) {
-                    datos+=j.getX()+" ";
-                    datos+=j.getY()+" ";
-                }
-                
             }
             if(i instanceof Obstaculo){
                 ((Obstaculo) i).PaintComponent(g2);

@@ -1,11 +1,8 @@
 package Conexiones;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -70,19 +67,29 @@ public class Servidor implements Runnable{
 
             servidor= new ServerSocket(6000);
             while(!jugar){
-                canales.add(new Canal(servidor.accept(),i,this));
+                canales.add(new Canal(servidor.accept(),this));
+                canales.get(i).escribir(i+",");
                 i++;
             }
-            
+            ms+=i+",";
             for(Canal j:canales){
-                ms += j.getMu()+(i-1)+",";
-                System.out.print(ms);
-            }
-           
-            canales.forEach((j)->{
+                ms += j.getMu();
+            }            
+            for(Canal j: canales){
                 j.escribir(ms);
-            });
+            }
             
+            
+            //ciclo principal del juego
+            while (true){
+                ms="";
+                for(int h=0;h<i;h++){
+                    ms+=canales.get(h).getSc1().nextLine()+",";
+                }
+                for(int h=0;h<i;h++){
+                    canales.get(h).escribir(ms);
+                }
+            }
 
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);

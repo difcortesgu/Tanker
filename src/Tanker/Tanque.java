@@ -22,9 +22,15 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     private int TipoOruga; //para seleccionar qué tipo de oruga tendrá
     private int TipoArmazon;//por ahora es final porque no hay más jejeje
     private final boolean viento;
+    private boolean click;
     
     public Tanque(double x, double y,int tipoArmazon,int tipoOruga, int vida ,int daño,boolean viento, Tablero tablero) {
         super(x, y,100, vida, tablero);
+        vx=0;
+        vy=0;
+        mx=x;
+        my=y;
+        click=false;
         this.viento=viento;
         this.daño = daño;
         balas = new ArrayList();
@@ -72,15 +78,15 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
             g.drawImage(armazon,  (int) x, (int) (y + tamaño),(int) (x + tamaño), (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);            
             g.drawImage(oruga, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
         } else if (a < 180) {
-            g.drawImage(armazon, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
-            g.drawImage(oruga,  (int) (x + tamaño), (int) (y + tamaño),(int) x, (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(oruga, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(armazon,  (int) (x + tamaño), (int) (y + tamaño),(int) x, (int) y, TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         } else if (a < 270) {
             i = 6 - i; 
-            g.drawImage(armazon, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
-            g.drawImage(oruga, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(oruga, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(armazon, (int) (x + tamaño), (int) y, (int) x, (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         } else {
-            g.drawImage(armazon, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
-            g.drawImage(oruga, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(oruga, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), ((2 * TipoOruga) + contador) * 181, i * 181, ((2 * TipoOruga) + contador + 1) * 181, (i + 1) * 181, tablero);
+            g.drawImage(armazon, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         }
         a = Math.toRadians(a);
     }
@@ -125,6 +131,10 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(click){
+            disparar();
+        }
+        
         dx = (mx - (x + (tamaño / 2)));
         dy = (my - (y + (tamaño / 2)));
         if (dx > 0) {
@@ -161,12 +171,30 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         }
     }
 
+    public void disparar(){
+        int x1 = (int) ((x + tamaño / 2) + (50 * Math.cos(a)));
+        int y1 = (int) ((y + tamaño / 2) + (50 * Math.sin(a)));
+        aceleracion=(Math.random()-Math.random())%2*PI;
+        balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this,aceleracion, tablero));
+        click=false;
+    }
+    
     @Override
     public void mouseDragged(MouseEvent e) {
         mx=e.getX();
         my=e.getY();
     }
 
+    public boolean isClick() {
+        return click;
+    }
+
+    public void setClick(boolean click) {
+        this.click = click;
+    }
+
+    
+    
     @Override
     public void mouseMoved(MouseEvent e) {
         mx = e.getX();
@@ -180,15 +208,11 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int x1 = (int) ((x + tamaño / 2) + (50 * Math.cos(a)));
-        int y1 = (int) ((y + tamaño / 2) + (50 * Math.sin(a)));
-        balas.add(new Bala(daño, x1, y1, vx * 2, vy * 2, 10, 50, this,viento, tablero));
-        aceleracion= balas.get(balas.size()-1).getA();
+        click=true;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        
     }
 
     @Override
