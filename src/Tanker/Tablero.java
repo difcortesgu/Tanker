@@ -112,7 +112,7 @@ public class Tablero extends JPanel implements ActionListener{
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        //g2.drawImage(loadImage("fondo"), 0, 0, this.getWidth(), this.getHeight(), 0, 0, 128, 128, this);
+        g2.drawImage(loadImage("fondo1.png"), 0, 0, this.getWidth(), this.getHeight(), 0, 0, 250, 250, this);
         for (Elemento i: elementos){
             if(i instanceof Tanque){
                 ((Tanque) i).paintComponent(g2);
