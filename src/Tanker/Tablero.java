@@ -9,6 +9,8 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
@@ -25,10 +27,11 @@ public class Tablero extends JPanel implements ActionListener{
     private final JButton atras;
     private boolean controles;//True = mouse / False = teclado 
     private final boolean viento;
-    private String datos;
+    private String datos,modo;
+    private int numerotanque;
     
-    public Tablero(String fondo,boolean viento,Ventana menu) {
-        
+    public Tablero(String fondo,String modo,boolean viento,Ventana menu) {
+        this.modo=modo;
         this.menu = menu; 
         this.viento=viento;
         atras = new JButton();
@@ -47,8 +50,20 @@ public class Tablero extends JPanel implements ActionListener{
         return elementos;
     }
     
+    public ArrayList<Tanque> getTanques(){
+        ArrayList<Tanque> t= new ArrayList();
+        for(int i=0;i<elementos.size();i++){
+            if(elementos.get(i) instanceof Tanque){
+                t.add((Tanque) elementos.get(i));
+            }
+        }
+        return t;
+    }
+    
     public void addTanque(int TipoArmazon,int TipoOruga,int vida,int daño,boolean controles,int numerotanque){
-        elementos.add(new Tanque(100+Math.random()%400, 100+Math.random()%300, TipoArmazon, TipoOruga,vida,daño, viento, this));
+        Random r = new Random();
+        this.numerotanque=numerotanque;
+        elementos.add(new Tanque(r.nextInt()%600, r.nextInt()%450, TipoArmazon, TipoOruga,vida,daño, viento, this));
         int j=0,h=0;
         if(controles){
             this.addMouseMotionListener(getTanque(numerotanque));
@@ -111,6 +126,9 @@ public class Tablero extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         for(int i=0;i<elementos.size();i++){
             if(elementos.get(i).die()){
+                if(elementos.get(i).equals(getTanque(numerotanque))){
+                    //que vamos a hacer cuando se elimine el tanque propio
+                }
                 elementos.get(i).finalize();               
                 elementos.remove(i);
             }

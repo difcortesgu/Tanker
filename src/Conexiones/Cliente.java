@@ -50,13 +50,13 @@ public class Cliente implements Runnable{
         ps1.println(sc2.nextLine());
         
         //Construccion de todos los Tableros de cada servidor
-        int j = sc1.nextInt();
-        this.tablero=new Tablero(sc1.next(), sc1.nextBoolean(), ventana);
+        int j = sc1.nextInt();//numero del jugador
+        this.tablero=new Tablero(sc1.next(),sc1.next(), sc1.nextBoolean(), ventana);
         int n = sc1.nextInt();
         System.out.println(j);
         System.out.println(n);
         for(int i=0;i<n;i++){
-            tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, true, j);    
+            tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, sc1.nextBoolean(), j);    
         }
         ventana.getPaneles().put("Tablero", tablero);
         ventana.add(ventana.getPanel("Tablero"));
@@ -64,7 +64,9 @@ public class Cliente implements Runnable{
         
         //Ciclo principal del juego
         while(true){
-            ps1.println((int)tablero.getTanque(j).getMx()+","+(int)tablero.getTanque(j).getMy()+","+tablero.getTanque(j).isClick()+","+(int)tablero.getTanque(j).getAceleracion());
+            if(!tablero.getTanque(j).die()){
+                ps1.println((int)tablero.getTanque(j).getMx()+","+(int)tablero.getTanque(j).getMy()+","+tablero.getTanque(j).isClick()+","+(int)tablero.getTanque(j).getAceleracion());
+            }
             for(int i=0;i<n;i++){
                 if(i!=j){
                     tablero.getTanque(i).setMx(sc1.nextInt());

@@ -19,7 +19,7 @@ public class Servidor implements Runnable{
     private boolean jugar;
     private String ms;
 
-    public Servidor(boolean viento, String fondo, String modo) {
+    public Servidor(String fondo, String modo, boolean viento) {
         jugar=false;
         datos = new File("datos_S.txt");
         if(!datos.exists()){
@@ -35,7 +35,7 @@ public class Servidor implements Runnable{
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("iniciar tablero.end.");
-        ms = sc.nextLine();  //lee datos servidor  para iniciar tablero
+        ms = fondo+","+modo+","+viento+",";  //lee datos servidor  para iniciar tablero
         canales = new ArrayList();
         t= new Thread(this,"servidor");
         t.start();
@@ -49,8 +49,6 @@ public class Servidor implements Runnable{
         this.jugar = jugar;
     }
 
-    
-    
     public ArrayList<Canal> getCanales() {
         return canales;
     }
@@ -74,7 +72,8 @@ public class Servidor implements Runnable{
             ms+=i+",";
             for(Canal j:canales){
                 ms += j.getMu();
-            }            
+            }     
+            System.out.println(ms);
             for(Canal j: canales){
                 j.escribir(ms);
             }

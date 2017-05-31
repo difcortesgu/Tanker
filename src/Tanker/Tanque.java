@@ -25,7 +25,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     private boolean click;
     
     public Tanque(double x, double y,int tipoArmazon,int tipoOruga, int vida ,int daño,boolean viento, Tablero tablero) {
-        super(x, y,100, vida, tablero);
+        super(x, y,50, vida, tablero);
         vx=0;
         vy=0;
         mx=x;
@@ -42,17 +42,39 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
 
     @Override
     public boolean colision() {
+        colisionBala();
         for (Elemento i : tablero.getElementos()) {
             if (i instanceof Obstaculo) {
                 if (this.getBounds().intersects(i.getBounds())) {
                     vx *= -1;
                     vy *= -1;
-                    vida--;
                     return true;
+                }
+            }
+            if(i instanceof Tanque){
+                if(i!=this){
+                    if(this.getBounds().intersects(i.getBounds())){
+                        vx *= -1;
+                        vy *= -1;
+                        return true;
+                    }
                 }
             }
         }
         return false;
+    }
+    
+    public void colisionBala(){
+        for(int i=0;i<tablero.getTanques().size();i++){
+            if (!tablero.getTanque(i).equals(this)){
+                for(int j=0;j<tablero.getTanque(i).getBalas().size();j++){
+                    if(tablero.getTanque(i).getBalas().get(j).getBounds().intersects(this.getBounds())){
+                        this.vida--;
+                        tablero.getTanque(i).eliminar_bala(j);
+                    }
+                }
+            }
+        }
     }
 
     public void paintComponent(Graphics2D g) {
@@ -61,7 +83,6 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
             i.paintComponent(g);
         });
         g.fillOval((int)mx, (int)my, 2, 2);
-        g.drawString(""+balas.size(), 10, 10);
     }
 
     public void pintarTanque(Graphics2D g) {
@@ -89,6 +110,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
             g.drawImage(armazon, (int) x, (int) y, (int) (x + tamaño), (int) (y + tamaño), TipoArmazon * 181, i * 181, (TipoArmazon + 1) * 181, (i + 1) * 181, tablero);
         }
         a = Math.toRadians(a);
+        g.drawString("vida = "+(int)this.vida, (int)x, (int)(y));
     }
 
     public void eliminar_bala(int i) {

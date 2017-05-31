@@ -1,8 +1,6 @@
 package Menus;
 
 import Conexiones.Servidor;
-import Conexiones.*;
-import Menus.Ventana;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -11,8 +9,11 @@ public class Crear extends javax.swing.JPanel {
 
     public Crear(Ventana m) {
         initComponents();
+        fondo="fondo";
         modo="ffa";
+        wind=false;
         this.jFrame1 = m;
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,6 +49,11 @@ public class Crear extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 260, 30));
 
         viento.setText("viento");
+        viento.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                vientoStateChanged(evt);
+            }
+        });
         add(viento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, -1));
 
         buttonGroup1.add(ffa);
@@ -90,7 +96,7 @@ public class Crear extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-        s = new Servidor(viento.isSelected(), "fondo", modo);
+        s = new Servidor(fondo,modo,wind);
         ((Ventana)jFrame1).Cambiar_panel("Espera","Crear");
     }//GEN-LAST:event_crearActionPerformed
 
@@ -105,6 +111,10 @@ public class Crear extends javax.swing.JPanel {
     private void teamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamsActionPerformed
         modo = "teams";
     }//GEN-LAST:event_teamsActionPerformed
+
+    private void vientoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_vientoStateChanged
+        wind = viento.isSelected();
+    }//GEN-LAST:event_vientoStateChanged
 
             @Override
     protected void paintComponent(Graphics g) {
@@ -124,6 +134,8 @@ public class Crear extends javax.swing.JPanel {
     }
 
     private String modo;
+    private final String fondo;
+    private boolean wind;
     private Servidor s;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;

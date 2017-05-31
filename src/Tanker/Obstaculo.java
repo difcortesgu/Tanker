@@ -16,18 +16,13 @@ public class Obstaculo extends Elemento{
     @Override
     public void actionPerformed(ActionEvent e) {
     
-        for (int i=0;i<tablero.getElementos().size();i++) {
-            
-            if(tablero.getElementos().get(i) instanceof Tanque){
-                
-                for(int j=0;j<((Tanque)(tablero.getElementos().get(i))).getBalas().size();j++){
-                    if(((Tanque)(tablero.getElementos().get(i))).getBalas().get(j).getBounds().intersects(this.getBounds())){
-                        ((Tanque)(tablero.getElementos().get(i))).eliminar_bala(j);
-                        vida--;
-                    }
+        for (int i=0;i<tablero.getTanques().size();i++) {                      
+            for(int j=0;j<tablero.getTanque(i).getBalas().size();j++){
+                if(tablero.getTanque(i).getBalas().get(j).getBounds().intersects(this.getBounds())){
+                    tablero.getTanque(i).eliminar_bala(j);
+                    vida--;
                 }
             }
-            
         }   
         if(x>700||x<-100){
             vx*=-1;

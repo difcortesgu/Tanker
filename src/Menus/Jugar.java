@@ -15,8 +15,8 @@ public class Jugar extends javax.swing.JPanel {
 
     public Jugar(Ventana m) {
         initComponents();
-        armazon.setValue(1);
-        oruga.setValue(1);
+        armazon.setValue(0);
+        oruga.setValue(0);
         File f= new File("datos_J.txt");
         if(!f.exists()){
             try {
@@ -33,6 +33,11 @@ public class Jugar extends javax.swing.JPanel {
             if(sc1.hasNext()){
                 armazon.setValue(sc1.nextInt());
                 oruga.setValue(sc1.nextInt());
+            }
+            if(sc1.hasNextBoolean()){
+               controles = sc1.hasNextBoolean();
+            }else{
+               controles=true;
             }
             ps1 = new PrintStream(f);
             sc1.close();
@@ -114,7 +119,8 @@ public class Jugar extends javax.swing.JPanel {
 
     private void CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActionPerformed
         ((Ventana)jFrame1).Cambiar_panel("Crear","Jugar");
-        ps1.print(armazon.getValue()+","+oruga.getValue()+",");
+        ps1.print(armazon.getValue()+","+oruga.getValue()+","+controles+",");
+        ps1.close();
     }//GEN-LAST:event_CrearActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
@@ -123,7 +129,8 @@ public class Jugar extends javax.swing.JPanel {
 
     private void EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntrarActionPerformed
         ((Ventana)jFrame1).Cambiar_panel("Entrar","Jugar");
-        ps1.print(armazon.getValue()+","+oruga.getValue()+",");
+        ps1.print(armazon.getValue()+","+oruga.getValue()+","+controles+",");
+        ps1.close();
     }//GEN-LAST:event_EntrarActionPerformed
 
     private void armazonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_armazonStateChanged
@@ -163,6 +170,7 @@ public class Jugar extends javax.swing.JPanel {
         return image;
     }
     private int tipoOruga,tipoArmazon;
+    private boolean controles;
     private PrintStream ps1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Crear;

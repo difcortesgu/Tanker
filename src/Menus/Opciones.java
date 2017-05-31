@@ -2,14 +2,55 @@ package Menus;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 public class Opciones extends javax.swing.JPanel {
 
     public Opciones(Ventana m) {
-        initComponents();
-        this.jFrame1=m;
+        
+            initComponents();
+            controls=true;
+            this.jFrame1=m;
+            File f= new File("datos_J.txt");
+            if(!f.exists()){
+                try {
+                    f.createNewFile();
+                } catch (IOException ex) {
+                    Logger.getLogger(Jugar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            Scanner sc1;
+            this.jFrame1=m;
+            try {
+                sc1= new Scanner(f);
+                sc1.useDelimiter(",");
+                teniaAlgo=sc1.hasNext();
+                if(teniaAlgo){
+                    a=sc1.nextInt();
+                    b=sc1.nextInt();
+                    if(sc1.hasNextBoolean()){
+                        controls = sc1.nextBoolean();
+                    }
+                    ps1 = new PrintStream(f);
+                }else{
+                    ps1 = new PrintStream(f);
+                    a=0;
+                    b=0;
+                    controls=true;
+                }
+                
+                sc1.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Jugar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -17,6 +58,7 @@ public class Opciones extends javax.swing.JPanel {
     private void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         atras = new javax.swing.JButton();
         controles = new javax.swing.JLabel();
         sonido = new javax.swing.JLabel();
@@ -55,6 +97,8 @@ public class Opciones extends javax.swing.JPanel {
         sonido.setText("Sonido");
         add(sonido, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, -1));
 
+        buttonGroup1.add(mouse);
+        mouse.setSelected(true);
         mouse.setText("Mouse");
         mouse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +107,7 @@ public class Opciones extends javax.swing.JPanel {
         });
         add(mouse, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
 
+        buttonGroup1.add(teclado);
         teclado.setText("Teclado");
         teclado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,19 +167,17 @@ public class Opciones extends javax.swing.JPanel {
     }//GEN-LAST:event_slider_sonidoStateChanged
 
     private void mouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mouseActionPerformed
-        teclado.setSelected(false);
-        mouse.setSelected(true);        
+       controls=true;
     }//GEN-LAST:event_mouseActionPerformed
 
     private void tecladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tecladoActionPerformed
-        mouse.setSelected(false);
-        teclado.setSelected(true);
-        
+        controls=false;
     }//GEN-LAST:event_tecladoActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-        ((Ventana)jFrame1).Cambiar_panel("Principal","Opciones");
-        this.setVisible(false);
+        ((Ventana)jFrame1).Cambiar_panel("Principal","Opciones"); 
+        ps1.print(a+","+b+","+controls+",");
+        ps1.close();
     }//GEN-LAST:event_atrasActionPerformed
 
     @Override
@@ -156,9 +199,12 @@ public class Opciones extends javax.swing.JPanel {
         return image;
     }
 
-    
+    private PrintStream ps1;
+    private boolean controls,teniaAlgo;
+    private int a,b;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel controles;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JPanel jdInstruccionesMouse;
