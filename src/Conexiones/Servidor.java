@@ -66,7 +66,6 @@ public class Servidor implements Runnable{
         
         int i=0,l=0;
         try {
-
             servidor= new ServerSocket(6000);
             while(!jugar){
                 canales.add(new Canal(servidor.accept(),this));
@@ -97,21 +96,25 @@ public class Servidor implements Runnable{
             }
             
             //ciclo principal del juego
-            while (true){
-                ms="";
-                for(int h=0;h<i;h++){
-                    ms+=canales.get(h).getSc1().nextLine()+",";
-                }
-                for(int h=0;h<i;h++){
-                    canales.get(h).escribir(ms);
-                }
+            while(true){
+                this.main(i);
             }
-
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
+    }
+    
+    public synchronized void main(int i){
+        ms="";
+        for(int h=0;h<i;h++){
+            ms+=canales.get(h).getSc1().nextLine()+",";
+        }
+        for(int h=0;h<i;h++){
+            canales.get(h).escribir(ms);
+        }
+
     }
 
 }

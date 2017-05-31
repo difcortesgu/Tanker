@@ -53,7 +53,7 @@ public class Canal{
         }
     }
     
-    public void escribir(String msm){
+    public synchronized void escribir(String msm){
         ps1.print(msm);
     }
                     

@@ -67,28 +67,34 @@ public class Cliente implements Runnable{
         ventana.setLocationRelativeTo(null);
         //Ciclo principal del juego
         while(true){
-            if(!tablero.getTanque(j).die()){
-                ps1.println((int)tablero.getTanque(j).getMx()+","+(int)tablero.getTanque(j).getMy()+","+tablero.getTanque(j).isClick()+","+(int)tablero.getTanque(j).getAceleracion());
-            }
-            for(int i=0;i<n;i++){
-                if(i!=j){
-                    tablero.getTanque(i).setMx(sc1.nextInt());
-                    tablero.getTanque(i).setMy(sc1.nextInt());
-                    tablero.getTanque(i).setClick(sc1.nextBoolean());
-                    tablero.getTanque(i).setAceleracion(sc1.nextDouble());
-                }else{
-                    sc1.next();
-                    sc1.next();
-                    sc1.next();
-                    sc1.next();
-                }
-                
-            }
+            this.main(n,j);
         }
     }
     
-    public void escribir(String sms){
+    public synchronized void escribir(String sms){
         ps1.print(sms);
+    }
+    
+    public synchronized void main(int n,int j){
+
+        if(!tablero.getTanque(j).die()){
+            ps1.println((int)tablero.getTanque(j).getMx()+","+(int)tablero.getTanque(j).getMy()+","+tablero.getTanque(j).isClick()+","+(int)tablero.getTanque(j).getAceleracion());
+        }
+        for(int i=0;i<n;i++){
+            if(i!=j){
+                tablero.getTanque(i).setMx(sc1.nextInt());
+                tablero.getTanque(i).setMy(sc1.nextInt());
+                tablero.getTanque(i).setClick(sc1.nextBoolean());
+                tablero.getTanque(i).setAceleracion(sc1.nextDouble());
+            }else{
+                sc1.next();
+                sc1.next();
+                sc1.next();
+                sc1.next();
+            }
+
+        }
+
     }
     
     private void iniciarDatos(){
