@@ -44,6 +44,28 @@ public class Tablero extends JPanel implements ActionListener{
         add(atras, new AbsoluteConstraints(10, 10, -1, -1));
         
         elementos = new ArrayList();
+                switch(this.fondo){
+            case "fondo1.png": 
+                elementos.add(new Obstaculo(100, 100, 50, 500, this));
+                elementos.add(new Obstaculo(300, 100, 50, 500, this));
+                elementos.add(new Obstaculo(100, 300, 50, 500, this));
+                elementos.add(new Obstaculo(300, 300, 50, 500, this));
+            case "fondo2.png":
+                elementos.add(new Obstaculo(100, 100, 50, 500, this));
+                elementos.add(new Obstaculo(300, 100, 50, 500, this));
+                elementos.add(new Obstaculo(100, 300, 50, 500, this));
+                elementos.add(new Obstaculo(300, 300, 50, 500, this));
+            case "fondo3.png":
+                elementos.add(new Obstaculo(100, 100, 50, 500, this));
+                elementos.add(new Obstaculo(300, 100, 50, 500, this));
+                elementos.add(new Obstaculo(100, 300, 50, 500, this));
+                elementos.add(new Obstaculo(300, 300, 50, 500, this));                
+            case "fondo4.png":
+                elementos.add(new Obstaculo(100, 100, 50, 500, this));
+                elementos.add(new Obstaculo(300, 100, 50, 500, this));
+                elementos.add(new Obstaculo(100, 300, 50, 500, this));
+                elementos.add(new Obstaculo(300, 300, 50, 500, this));
+        }
         timer = new Timer(1,this);
         timer.start();               
     }

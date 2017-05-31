@@ -13,7 +13,7 @@ public class Obstaculo extends Elemento{
     public Obstaculo(double x, double y, double tamaño, double vida, Tablero tablero) {
         super(x, y, tamaño, vida, tablero);
         vx=0;
-        vy=0;        
+        vy=0;       
     }
 
     @Override
@@ -54,7 +54,6 @@ public class Obstaculo extends Elemento{
         
         g.drawImage(loadImage(obstaculo),(int)x, (int)y, (int)tamaño, (int)tamaño,null);
         g.drawString(""+vida, (int)(x+(tamaño/2)), (int)(y+(tamaño/2)));
-        tablero.repaint();
     }
 
     @Override
