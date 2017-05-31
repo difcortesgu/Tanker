@@ -12,7 +12,7 @@ public class Entrar extends javax.swing.JPanel {
 
     public Entrar(Ventana m) {
         initComponents();
-        this.puedeEntrar=true;
+       
         IP="localhost";
         this.ingresarIP.setText("localhost");
         this.jFrame1 = m;
@@ -73,29 +73,18 @@ public class Entrar extends javax.swing.JPanel {
     }//GEN-LAST:event_atrasActionPerformed
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        if(puedeEntrar){
+       
             ((Ventana)jFrame1).Cambiar_panel("Espera", "Entrar");
             ((Espera)((Ventana)jFrame1).getPanel("Espera")).getIniciar().setVisible(false);
             Cliente c = new Cliente("localhost",(Ventana)jFrame1);            
-        }else{
-            JOptionPane.showMessageDialog(null, "La direccion ip no puede contener letras", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+        
                 
     }//GEN-LAST:event_entrarActionPerformed
 
     private void ingresarIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarIPActionPerformed
-        Scanner sc = new Scanner(ingresarIP.getText());
-        sc.useDelimiter(".");
-        IP="";
-        try{
-            while(sc.hasNext()){
-                IP += sc.nextInt()+".";
-            }
-            puedeEntrar=true;
-        }catch(InputMismatchException e){
-            puedeEntrar=false;
-            JOptionPane.showMessageDialog(null, "La direccion ip no puede contener letras", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+       
+        IP=ingresarIP.getText();
+       
     }//GEN-LAST:event_ingresarIPActionPerformed
 
         @Override
@@ -112,7 +101,7 @@ public class Entrar extends javax.swing.JPanel {
     }
 
     private String IP;
-    private boolean puedeEntrar;
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;
     private javax.swing.JButton entrar;

@@ -84,10 +84,10 @@ public class Tablero extends JPanel implements ActionListener{
         return t;
     }
     
-    public void addTanque(String equipo,int TipoArmazon,int TipoOruga,int vida,int daño,boolean controles,int numerotanque){
+    public void addTanque(String equipo,int TipoArmazon,int TipoOruga,int vida,int daño,boolean controles,int numerotanque,int x, int y){
         Random r = new Random();
         this.numerotanque=numerotanque;
-        elementos.add(new Tanque(r.nextInt(menu.getWidth()), r.nextInt(menu.getHeight()), TipoArmazon, TipoOruga,vida,daño, viento, this));
+        elementos.add(new Tanque(x, y, TipoArmazon, TipoOruga,vida,daño, viento, this));
         int j=0,h=0;
         ((Tanque)elementos.get(elementos.size()-1)).setEquipo(equipo);
         ((Tanque)elementos.get(elementos.size()-1)).setModo(modo);

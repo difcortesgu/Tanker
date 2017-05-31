@@ -18,6 +18,7 @@ public class Servidor implements Runnable{
     private Scanner sc;
     private boolean jugar,viento;
     private String ms,modo,fondo;
+    private int x,y;
 
     public Servidor(String fondo, String modo, boolean viento) {
         jugar=false;
@@ -74,6 +75,9 @@ public class Servidor implements Runnable{
             }
             ms+=i+",";
             for(Canal j:canales){
+                x=(int)(100* Math.random());
+                y=(int)( 700*Math.random());
+                
                 if(modo.equalsIgnoreCase("ffa")){
                     ms += "rojo,"+j.getMu();
                 }else{
@@ -84,8 +88,10 @@ public class Servidor implements Runnable{
                     }
                 }
                 l++;
+                ms+=x+","+y+",";
+                
             }     
-            System.out.println(ms);
+            System.out.println(ms+x+","+y+",");
             for(Canal j: canales){
                 j.escribir(ms);
             }

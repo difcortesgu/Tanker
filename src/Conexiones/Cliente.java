@@ -52,16 +52,19 @@ public class Cliente implements Runnable{
         //Construccion de todos los Tableros de cada servidor
         int j = sc1.nextInt();//numero del jugador
         this.tablero=new Tablero(sc1.next(),sc1.next(), sc1.nextBoolean(), ventana);
+        
         int n = sc1.nextInt();
         System.out.println(j);
         System.out.println(n);
+        
         for(int i=0;i<n;i++){
-            tablero.addTanque(sc1.next(),sc1.nextInt(),sc1.nextInt(), 100,100, sc1.nextBoolean(), j);    
+            tablero.addTanque(sc1.next(),sc1.nextInt(),sc1.nextInt(), 100,100, sc1.nextBoolean(), j,sc1.nextInt(),sc1.nextInt());    
         }
         ventana.getPaneles().put("Tablero", tablero);
         ventana.add(ventana.getPanel("Tablero"));
         ventana.Cambiar_panel("Tablero", "Espera");
-        
+        ventana.setSize(1080, 720);
+        ventana.setLocationRelativeTo(null);
         //Ciclo principal del juego
         while(true){
             if(!tablero.getTanque(j).die()){
