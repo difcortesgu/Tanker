@@ -1,6 +1,5 @@
 package Conexiones;
 
-import Conexiones.Servidor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class Canal{
         comunicacion();
     }
 
-    public void comunicacion() {
+    public final void comunicacion() {
         iniciarDatos();
         System.out.println("se conecto cliente"+(numerotanque+1));
         mu=sc1.nextLine();

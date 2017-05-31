@@ -33,7 +33,7 @@ public class Tablero extends JPanel implements ActionListener{
     public Tablero(String fondo,boolean viento,Ventana menu) {
         
         this.menu = menu; 
-        this.controles=controles;
+        this.controles = true;
         this.viento=viento;
         atras = new JButton();
         atras.setText("atras");
@@ -100,22 +100,24 @@ public class Tablero extends JPanel implements ActionListener{
         Graphics2D g2= (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         //g2.drawImage(loadImage("fondo"), 0, 0, this.getWidth(), this.getHeight(), 0, 0, 128, 128, this);
-        for(Elemento i: elementos){
+        elementos.stream().map((Elemento i) -> {
             if(i instanceof Tanque){
                 ((Tanque) i).paintComponent(g2);
                 datos+=i.getX()+" ";
                 datos+=i.getY()+" ";
                 datos+=((Tanque) i).getBalas().size()+" ";
-                for (Bala j : ((Tanque) i).getBalas()) {
+                ((Tanque) i).getBalas().stream().map((Bala j) -> {
                     datos+=j.getX()+" ";
+                    return j;
+                }).forEachOrdered((j) -> {
                     datos+=j.getY()+" ";
-                }
+                });
                 
             }
-            if(i instanceof Obstaculo){
-                ((Obstaculo) i).PaintComponent(g2);
-            }
-        }
+            return i;
+        }).filter((i) -> (i instanceof Obstaculo)).forEachOrdered((i) -> {
+            ((Obstaculo) i).PaintComponent(g2);
+        });
     }
     
    
@@ -137,5 +139,29 @@ public class Tablero extends JPanel implements ActionListener{
 
         return image;
     }   
+
+    public boolean isViento() {
+        return viento;
+    }
+
+    public void setViento(boolean viento) {
+        this.viento = viento;
+    }  
+
+    public boolean isControles() {
+        return controles;
+    }
+
+    public void setControles(boolean controles) {
+        this.controles = controles;
+    }
+
+    public String getFondo() {
+        return fondo;
+    }
+
+    public void setFondo(String fondo) {
+        this.fondo = fondo;
+    }
     
 }
