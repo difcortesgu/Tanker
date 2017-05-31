@@ -60,11 +60,13 @@ public class Tablero extends JPanel implements ActionListener{
         return t;
     }
     
-    public void addTanque(int TipoArmazon,int TipoOruga,int vida,int daño,boolean controles,int numerotanque){
+    public void addTanque(String equipo,int TipoArmazon,int TipoOruga,int vida,int daño,boolean controles,int numerotanque){
         Random r = new Random();
         this.numerotanque=numerotanque;
-        elementos.add(new Tanque(r.nextInt()%600, r.nextInt()%450, TipoArmazon, TipoOruga,vida,daño, viento, this));
+        elementos.add(new Tanque(r.nextInt(menu.getWidth()), r.nextInt(menu.getHeight()), TipoArmazon, TipoOruga,vida,daño, viento, this));
         int j=0,h=0;
+        ((Tanque)elementos.get(elementos.size()-1)).setEquipo(equipo);
+        ((Tanque)elementos.get(elementos.size()-1)).setModo(modo);
         if(controles){
             this.addMouseMotionListener(getTanque(numerotanque));
         }else{
@@ -73,6 +75,7 @@ public class Tablero extends JPanel implements ActionListener{
         }
         this.addMouseListener(getTanque(numerotanque));
     }
+
 
     public Tanque getTanque(int h){
         int j=0;

@@ -16,11 +16,14 @@ public class Servidor implements Runnable{
     private File datos;
     private ServerSocket servidor;
     private Scanner sc;
-    private boolean jugar;
-    private String ms;
+    private boolean jugar,viento;
+    private String ms,modo,fondo;
 
     public Servidor(String fondo, String modo, boolean viento) {
         jugar=false;
+        this.fondo=fondo;
+        this.modo=modo;
+        this.viento=viento;
         datos = new File("datos_S.txt");
         if(!datos.exists()){
             try {
@@ -60,7 +63,7 @@ public class Servidor implements Runnable{
     @Override
     public void run() {
         
-        int i=0;
+        int i=0,l=0;
         try {
 
             servidor= new ServerSocket(6000);
@@ -71,13 +74,21 @@ public class Servidor implements Runnable{
             }
             ms+=i+",";
             for(Canal j:canales){
-                ms += j.getMu();
+                if(modo.equalsIgnoreCase("ffa")){
+                    ms += "rojo,"+j.getMu();
+                }else{
+                    if(l%2 == 0){
+                        ms += "rojo,"+j.getMu();
+                    }else{
+                        ms += "azul,"+j.getMu();
+                    }
+                }
+                l++;
             }     
             System.out.println(ms);
             for(Canal j: canales){
                 j.escribir(ms);
             }
-            
             
             //ciclo principal del juego
             while (true){

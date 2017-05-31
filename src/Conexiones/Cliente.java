@@ -56,7 +56,7 @@ public class Cliente implements Runnable{
         System.out.println(j);
         System.out.println(n);
         for(int i=0;i<n;i++){
-            tablero.addTanque(sc1.nextInt(),sc1.nextInt(), 100,100, sc1.nextBoolean(), j);    
+            tablero.addTanque(sc1.next(),sc1.nextInt(),sc1.nextInt(), 100,100, sc1.nextBoolean(), j);    
         }
         ventana.getPaneles().put("Tablero", tablero);
         ventana.add(ventana.getPanel("Tablero"));

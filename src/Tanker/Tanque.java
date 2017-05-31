@@ -23,6 +23,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     private int TipoArmazon;//por ahora es final porque no hay más jejeje
     private final boolean viento;
     private boolean click;
+    private String equipo,modo;
     
     public Tanque(double x, double y,int tipoArmazon,int tipoOruga, int vida ,int daño,boolean viento, Tablero tablero) {
         super(x, y,50, vida, tablero);
@@ -42,7 +43,11 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
 
     @Override
     public boolean colision() {
-        colisionBala();
+        if(modo.equalsIgnoreCase("ffa")){
+            colisionBalaffa();
+        }else{
+            colisionBalateams();
+        }
         for (Elemento i : tablero.getElementos()) {
             if (i instanceof Obstaculo) {
                 if (this.getBounds().intersects(i.getBounds())) {
@@ -64,7 +69,7 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         return false;
     }
     
-    public void colisionBala(){
+    public void colisionBalaffa(){
         for(int i=0;i<tablero.getTanques().size();i++){
             if (!tablero.getTanque(i).equals(this)){
                 for(int j=0;j<tablero.getTanque(i).getBalas().size();j++){
@@ -77,6 +82,31 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
         }
     }
 
+    public void colisionBalateams(){
+        for(int i=0;i<tablero.getTanques().size();i++){
+            if (equipo.equalsIgnoreCase("azul")){
+                if(i%2==0){
+                    for(int j=0;j<tablero.getTanque(i).getBalas().size();j++){
+                        if(tablero.getTanque(i).getBalas().get(j).getBounds().intersects(this.getBounds())){
+                            this.vida--;
+                            tablero.getTanque(i).eliminar_bala(j);
+                        }                    
+                    }
+                }
+            }else{
+                if(i%2!=0){
+                    for(int j=0;j<tablero.getTanque(i).getBalas().size();j++){
+                        if(tablero.getTanque(i).getBalas().get(j).getBounds().intersects(this.getBounds())){
+                            this.vida--;
+                            tablero.getTanque(i).eliminar_bala(j);
+                        }                    
+                    }
+                }                
+            }
+        }
+    }
+
+    
     public void paintComponent(Graphics2D g) {
         this.pintarTanque(g);
         balas.forEach((i) -> {
@@ -88,7 +118,12 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     public void pintarTanque(Graphics2D g) {
 
         oruga = loadImage("Tanque.png");
-        armazon = loadImage("Rojos.png");
+        if(equipo.equalsIgnoreCase("azul")){
+            armazon = loadImage("Azules.png");
+        }else{
+            armazon = loadImage("Rojos.png");
+        }
+        
         
 
         a = Math.toDegrees(a);
@@ -294,4 +329,21 @@ public class Tanque extends Elemento implements MouseMotionListener, MouseListen
     @Override
     public void keyReleased(KeyEvent e) {
     }
+
+    public String getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(String equipo) {
+        this.equipo = equipo;
+    }
+
+    public String getModo() {
+        return modo;
+    }
+
+    public void setModo(String modo) {
+        this.modo = modo;
+    }
+    
 }
