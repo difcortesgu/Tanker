@@ -10,7 +10,7 @@ public class Crear extends javax.swing.JPanel {
     public Crear(Ventana m) {
         initComponents();
         fondos.setValue(1);
-        fondo="fondo";
+        fondo="fondo1.png";
         modo="ffa";
         wind=false;
         this.jFrame1 = m;
@@ -123,10 +123,10 @@ public class Crear extends javax.swing.JPanel {
             fondos.setValue(4);
         }
         switch((int)fondos.getValue()){
-            case 1:fondo="fondo1.jpg";break;
-            case 2:fondo="fondo2.jpg";break;
-            case 3:fondo="fondo3.jpg";break;
-            case 4:fondo="fondo4.jpg";break;
+            case 1:fondo="fondo1.png";break;
+            case 2:fondo="fondo2.png";break;
+            case 3:fondo="fondo3.png";break;
+            case 4:fondo="fondo4.png";break;
         }
         this.repaint();
     }//GEN-LAST:event_fondosStateChanged

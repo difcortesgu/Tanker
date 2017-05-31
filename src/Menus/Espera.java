@@ -42,7 +42,7 @@ public class Espera extends javax.swing.JPanel {
     public JButton getIniciar() {
         return Iniciar;
     }
-
+ 
     public void setIniciar(JButton Iniciar) {
         this.Iniciar = Iniciar;
     }
